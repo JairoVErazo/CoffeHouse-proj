@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34316.72
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeHouse.Server", "ReactApp2.Server\CoffeHouse.Server.csproj", "{206BDD87-205E-4A6D-8214-2B0BCF40304A}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "CoffeHouse.client", "reactapp2.client\CoffeHouse.client.esproj", "{DAA4E49C-DD30-4962-9BB2-6C5D60862841}"
+	ProjectSection(ProjectDependencies) = postProject
+		{206BDD87-205E-4A6D-8214-2B0BCF40304A} = {206BDD87-205E-4A6D-8214-2B0BCF40304A}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{206BDD87-205E-4A6D-8214-2B0BCF40304A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{206BDD87-205E-4A6D-8214-2B0BCF40304A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{206BDD87-205E-4A6D-8214-2B0BCF40304A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{206BDD87-205E-4A6D-8214-2B0BCF40304A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAA4E49C-DD30-4962-9BB2-6C5D60862841}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAA4E49C-DD30-4962-9BB2-6C5D60862841}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAA4E49C-DD30-4962-9BB2-6C5D60862841}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{DAA4E49C-DD30-4962-9BB2-6C5D60862841}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAA4E49C-DD30-4962-9BB2-6C5D60862841}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAA4E49C-DD30-4962-9BB2-6C5D60862841}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0D1A72F3-DF53-40D7-9DB9-294A9E4EA41E}
+	EndGlobalSection
+EndGlobal
