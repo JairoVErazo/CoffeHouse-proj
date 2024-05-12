@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using CoffeHouse.Server.Servicios;
+using CoffeHouse.Server.Models.Custom;
+using COFFEHOUSE.Server.Servicios;
 namespace CoffeHouse.Server.Controllers
 {
     [Route("api/[controller]")]
@@ -12,10 +14,13 @@ namespace CoffeHouse.Server.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioStore _userStore;
+        private readonly IAutorizacionService _autorizacion;
 
-        public UsuarioController(IUsuarioStore userStore)
+        public UsuarioController(IUsuarioStore userStore,
+                                 IAutorizacionService autorizacion)
         {
             _userStore = userStore;
+            _autorizacion = autorizacion;
         }
 
 
@@ -41,6 +46,15 @@ namespace CoffeHouse.Server.Controllers
             }
 
             return BadRequest();
+        }
+
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(AutorizacionRequest request)
+        {
+            var response = await _autorizacion.DevolverToken(request);
+
+            return Ok(response);
         }
 
     }

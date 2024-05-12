@@ -1,6 +1,8 @@
 using CoffeHouse.Server.Models;
 using CoffeHouse.Server.Servicios;
+using COFFEHOUSE.Server.Servicios;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -18,6 +20,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CoffehouseContext>(opt => 
 opt.UseSqlServer("name=DefaultConnection"));
 builder.Services.AddTransient<IUsuarioStore, UsuarioStore>();
+builder.Services.AddScoped<IPasswordHasher<Usuario>, PasswordHasher<Usuario>>();
+builder.Services.AddScoped<IAutorizacionService, AutorizacionService>();
 builder.Services.AddAuthentication(config =>
 {
     config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
