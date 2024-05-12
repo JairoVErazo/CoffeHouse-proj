@@ -4,11 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeHouse.Server", "ReactApp2.Server\CoffeHouse.Server.csproj", "{206BDD87-205E-4A6D-8214-2B0BCF40304A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DAA4E49C-DD30-4962-9BB2-6C5D60862841} = {DAA4E49C-DD30-4962-9BB2-6C5D60862841}
+	EndProjectSection
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "CoffeHouse.client", "reactapp2.client\CoffeHouse.client.esproj", "{DAA4E49C-DD30-4962-9BB2-6C5D60862841}"
-	ProjectSection(ProjectDependencies) = postProject
-		{206BDD87-205E-4A6D-8214-2B0BCF40304A} = {206BDD87-205E-4A6D-8214-2B0BCF40304A}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

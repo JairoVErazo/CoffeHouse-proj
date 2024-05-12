@@ -6,19 +6,18 @@ import { useState, useEffect } from 'react';
 export default function Home() {
     const [datos, setDatos] = useState([]);
 
+    async function getWeather() {
+        try {
+            const respuesta = await fetch('api/weatherforecast');
+            const datosJSON = await respuesta.json();
+            setDatos(datosJSON);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const respuesta = await fetch('api/weatherforecast');
-                const datosJSON = await respuesta.json();
-                setDatos(datosJSON);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-
-        };
-
-        fetchData();
+        getWeather();
     }, []);
 
     console.log(datos);
