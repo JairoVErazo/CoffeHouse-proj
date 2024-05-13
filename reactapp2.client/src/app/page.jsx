@@ -17,7 +17,7 @@ export default function Home() {
             </p>
           </div>
           <div className="w-1/2 px-14">
-                      <img src="https://localhost:7195/Imagenes/3640c218-17fe-42e4-a3e7-e0f90a1cd19f.jpg" className="h-auto" alt="pastel" />
+                      <img src="img/img1.png" className="h-auto" alt="pastel" />
           </div>
         </div>
         <div className="flex">

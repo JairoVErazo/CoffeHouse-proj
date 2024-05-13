@@ -1,33 +1,27 @@
 export default function Home() {
   return (
     <div className="flex flex-col items-center">
-      <h1 className="text-rose-900 text-6xl text-center mb-20 font-semibold ">
-        Menú
-      </h1>
-      <div className="flex  mb-24">
-        <div className="w-3/12 px-14 mt-14 text-4xl text-rose-900 font-semibold">
-          <ul className="list-disc pl-4">
-            <li className="mb-8 hover:bg-pink-100 hover:rounded-full cursor-pointer">
-              Ice Coffe
+      <ul className="font-bold flex  p-4 mt-2 space-x-24   flex-row text-rose-900 text-4xl  mb-20 list-disc">
+            <li className=" hover:bg-white hover:rounded-full cursor-pointer">
+              Ice Coffe 
             </li>
-            <li className="mb-8 hover:bg-pink-100  hover:rounded-full cursor-pointer">
+            <li className=" hover:bg-white  hover:rounded-full cursor-pointer">
               Hot Coffe
             </li>
-            <li className="mb-8 hover:bg-pink-100  hover:rounded-full cursor-pointer">
+            <li className=" hover:bg-white  hover:rounded-full cursor-pointer">
               Dessert
             </li>
-            <li className="mb-8 hover:bg-pink-100  hover:rounded-full cursor-pointer">
-              Temporada
+            <li className=" hover:bg-white  hover:rounded-full cursor-pointer">
+              Temporada 
             </li>
-            <li className="mb-8 hover:bg-pink-100  hover:rounded-full cursor-pointer">
+            <li className=" hover:bg-white  hover:rounded-full cursor-pointer">
               Extras
             </li>
           </ul>
-        </div>
         <div className="">
-          <div className="w-2/12 flex">
+          <div className="flex mb-10">
             <div className="pe-14">
-              <div className="max-w-sm  border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
+              <div className="max-w-sm  border border-gray-200 rounded-lg shadow ">
                 <a href="#">
                   <img
                     src="img/menu1.png"
@@ -51,7 +45,7 @@ export default function Home() {
             </div>
 
             <div className="px-14">
-              <div className="max-w-sm  border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
+              <div className="max-w-sm  border border-gray-200 rounded-lg shadow ">
                 <a href="#">
                   <img
                     src="img/menu1.png"
@@ -74,7 +68,7 @@ export default function Home() {
               </div>
             </div>
             <div className="ps-14">
-              <div className="max-w-sm  border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
+              <div className="max-w-sm  border border-gray-200 rounded-lg shadow  ">
                 <a href="#">
                   <img
                     src="img/menu1.png"
@@ -99,9 +93,9 @@ export default function Home() {
           </div>
 
           {/* Fila nueva */}
-          <div className="w-2/12 flex mt-10">
+          <div className=" flex mt-10 mb-10">
             <div className="pe-14">
-              <div className="max-w-sm  border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
+              <div className="max-w-sm  border border-gray-200 rounded-lg shadow ">
                 <a href="#">
                   <img
                     src="img/menu1.png"
@@ -125,7 +119,7 @@ export default function Home() {
             </div>
 
             <div className="px-14">
-              <div className="max-w-sm  border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
+              <div className="max-w-sm  border border-gray-200 rounded-lg shadow  ">
                 <a href="#">
                   <img
                     src="img/menu1.png"
@@ -148,7 +142,7 @@ export default function Home() {
               </div>
             </div>
             <div className="ps-14">
-              <div className="max-w-sm  border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
+              <div className="max-w-sm  border border-gray-200 rounded-lg shadow  ">
                 <a href="#">
                   <img
                     src="img/menu1.png"
@@ -173,6 +167,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </div>
+    
   );
 }
