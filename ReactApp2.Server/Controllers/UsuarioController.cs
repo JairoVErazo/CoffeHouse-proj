@@ -59,7 +59,7 @@ namespace CoffeHouse.Server.Controllers
                 return Ok(response);
             }
 
-            return BadRequest(_autorizacion.CreateErrorResult("usuario inactivo", "porfavor comuniquese con su gerente"));
+            return BadRequest(_autorizacion.CreateErrorResult("usuario inactivo", "Usuario inactivo, porfavor comuniquese con su gerente para activar su cuenta"));
         }
 
     }

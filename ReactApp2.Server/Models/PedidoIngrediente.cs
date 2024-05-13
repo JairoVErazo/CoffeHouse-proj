@@ -7,7 +7,7 @@ public partial class PedidoIngrediente
 {
     public int IdPedido { get; set; }
 
-    public int Entrada { get; set; }
+    public int Cantidad { get; set; }
 
     public DateOnly FechaPedido { get; set; }
 

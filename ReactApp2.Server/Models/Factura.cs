@@ -13,5 +13,7 @@ public partial class Factura
 
     public decimal Total { get; set; }
 
-    public bool MetodoPago { get; set; }
+    public int IdMetodopago { get; set; }
+
+    public virtual MetodoPago IdMetodopagoNavigation { get; set; } = null!;
 }

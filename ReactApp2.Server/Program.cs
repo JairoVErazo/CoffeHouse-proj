@@ -22,6 +22,8 @@ opt.UseSqlServer("name=DefaultConnection"));
 builder.Services.AddTransient<IUsuarioStore, UsuarioStore>();
 builder.Services.AddScoped<IPasswordHasher<Usuario>, PasswordHasher<Usuario>>();
 builder.Services.AddScoped<IAutorizacionService, AutorizacionService>();
+builder.Services.AddTransient<IRepositorioProductos, RepositorioProductos>();
+builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddAuthentication(config =>
 {
     config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
