@@ -52,9 +52,14 @@ namespace CoffeHouse.Server.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(AutorizacionRequest request)
         {
-            var response = await _autorizacion.DevolverToken(request);
+            if(await _autorizacion.UsuarioEsActivo(request))
+            {
+                var response = await _autorizacion.DevolverToken(request);
 
-            return Ok(response);
+                return Ok(response);
+            }
+
+            return BadRequest(_autorizacion.CreateErrorResult("usuario inactivo", "porfavor comuniquese con su gerente"));
         }
 
     }

@@ -20,7 +20,8 @@ const page = () => {
   const handleSubmit = async (e) => {
     e.PreventDefault();
 
-    setData(objInfo);
+      setData(objInfo);
+    console.log(data)
 
     try {
       const response = await fetch("/Usuario/registro", {

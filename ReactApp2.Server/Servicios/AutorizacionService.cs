@@ -1,6 +1,7 @@
 ﻿using CoffeHouse.Server.Models;
 using CoffeHouse.Server.Models.Custom;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -10,7 +11,9 @@ namespace COFFEHOUSE.Server.Servicios
 {
     public interface IAutorizacionService
     {
+        AutorizacionResponse CreateErrorResult(string error, string message);
         Task<AutorizacionResponse> DevolverToken(AutorizacionRequest request);
+        Task<bool> UsuarioEsActivo(AutorizacionRequest request);
     }
     public class AutorizacionService: IAutorizacionService
     {
@@ -115,7 +118,7 @@ namespace COFFEHOUSE.Server.Servicios
             return clave;
         }
 
-        private AutorizacionResponse CreateErrorResult(string error, string message)
+        public AutorizacionResponse CreateErrorResult(string error, string message)
         {
             return new AutorizacionResponse
             {
@@ -124,6 +127,17 @@ namespace COFFEHOUSE.Server.Servicios
                 Mensaje = message
             };
         }
+
+        public async Task<bool> UsuarioEsActivo(AutorizacionRequest request)
+        {
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(x => x.NombreUsuario.Equals(request.NombreUsuario));
+
+
+            if (usuario.Estado is true)
+                return true;
+
+            return false;
+        } 
 
     }
 }

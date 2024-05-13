@@ -36,11 +36,6 @@ const keyFilePath = path.join(baseFolder, `${certificateName}.key`);
     }
 
 const nextConfig = {
-    webpack: {
-        alias: {
-            '@': path.resolve('./src'), // Usa path.resolve en lugar de __dirname
-        },
-    },
     images: {
         loader: 'akamai',
         path: '/',
