@@ -21,6 +21,10 @@ const page = () => {
     e.PreventDefault();
 
     setData(objInfo);
+<<<<<<< Updated upstream
+=======
+    console.log(data);
+>>>>>>> Stashed changes
 
     try {
       const response = await fetch("/Usuario/registro", {
@@ -169,8 +173,7 @@ const page = () => {
 
           <button
             type="submit"
-            style={{ backgroundColor: "#94303c" }}
-            className="px-14 text-white font-bold rounded-lg mt-10 py-2"
+            className="px-14 text-white font-bold rounded-lg mt-10 py-2 botones"
           >
             Sign up
           </button>
