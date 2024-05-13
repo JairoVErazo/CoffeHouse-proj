@@ -24,7 +24,7 @@ namespace CoffeHouse.Server.Controllers
         }
 
 
-        [HttpPost("registro")]
+        [HttpPost]
 
         public async Task<IActionResult> RegistrarUsuario([FromBody] UsuarioDTO usuarioDTO)
         {

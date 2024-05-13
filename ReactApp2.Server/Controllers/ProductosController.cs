@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CoffeHouse.Server.Dto_s;
 using CoffeHouse.Server.Models;
+using CoffeHouse.Server.Models.Custom;
 using CoffeHouse.Server.Servicios;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -40,6 +41,16 @@ namespace CoffeHouse.Server.Controllers
             var productoPublico = mapper.Map<ProductoDTO>(producto);
 
             return Ok(productoPublico);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> CrearProducto(CrearProductoRequest request)
+        {
+
+            var nuevoProducto = await _repositorioProductos.CrearProducto(request);
+
+            return Ok(nuevoProducto);
         }
     }
 }

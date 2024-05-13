@@ -4,6 +4,7 @@ using COFFEHOUSE.Server.Servicios;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -56,7 +57,11 @@ var app = builder.Build();
 
 
 app.UseDefaultFiles();
-app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Imagenes")),
+    RequestPath = "/Imagenes"
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
