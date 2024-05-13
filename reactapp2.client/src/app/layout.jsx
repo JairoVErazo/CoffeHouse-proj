@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
           color: "black",
         }}
       >
-        <NavBarAdmin />
+        <NavBar/>
         {children}
       </body>
     </html>

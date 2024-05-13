@@ -1,26 +1,35 @@
+
+ 
+
 export default function Home() {
+ 
   return (
-    <div className="flex flex-col items-center">
-      <ul className="font-bold flex  p-4 mt-2 space-x-24   flex-row text-rose-900 text-4xl  mb-20 list-disc">
-            <li className=" hover:bg-white hover:rounded-full cursor-pointer">
+    <div className="flex flex-col items-center py-10">
+      <ul className="font-bold flex  p-4 mt-2 space-x-24  flex-row text-rose-900 text-4xl  mb-20 list-disc cursor-pointer">
+      <li className=" hover:text-pink-950">
               Ice Coffe 
             </li>
-            <li className=" hover:bg-white  hover:rounded-full cursor-pointer">
+            <li className=" hover:text-pink-950  ">
               Hot Coffe
             </li>
-            <li className=" hover:bg-white  hover:rounded-full cursor-pointer">
+            <li className=" hover:text-pink-950  ">
               Dessert
             </li>
-            <li className=" hover:bg-white  hover:rounded-full cursor-pointer">
+            <li className=" hover:text-pink-950">
               Temporada 
             </li>
-            <li className=" hover:bg-white  hover:rounded-full cursor-pointer">
+            <li className=" hover:text-pink-950">
               Extras
             </li>
           </ul>
         <div className="">
           <div className="flex mb-10">
-            <div className="pe-14">
+            <div className="pe-14 relative">
+            <div className="absolute top-0 left-2">
+              <button>
+                <img src="info.svg" alt="Modal Icon" className="h-8" />
+              </button>
+            </div>
               <div className="max-w-sm  border border-gray-200 rounded-lg shadow ">
                 <a href="#">
                   <img
@@ -44,7 +53,12 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="px-14">
+            <div className="px-14 relative">
+            <div className="absolute top-0 left-16">
+              <button>
+                <img src="info.svg" alt="Modal Icon" className="h-8" />
+              </button>
+            </div>
               <div className="max-w-sm  border border-gray-200 rounded-lg shadow ">
                 <a href="#">
                   <img
@@ -67,7 +81,12 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="ps-14">
+            <div className="ps-14 relative">
+            <div className="absolute top-0 left-16">
+              <button>
+                <img src="info.svg" alt="Modal Icon" className="h-8" />
+              </button>
+            </div>
               <div className="max-w-sm  border border-gray-200 rounded-lg shadow  ">
                 <a href="#">
                   <img
@@ -94,7 +113,12 @@ export default function Home() {
 
           {/* Fila nueva */}
           <div className=" flex mt-10 mb-10">
-            <div className="pe-14">
+            <div className="pe-14 relative">
+            <div className="absolute top-0 left-2">
+              <button>
+                <img src="info.svg" alt="Modal Icon" className="h-8" />
+              </button>
+            </div>
               <div className="max-w-sm  border border-gray-200 rounded-lg shadow ">
                 <a href="#">
                   <img
@@ -118,7 +142,12 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="px-14">
+            <div className="px-14 relative">
+            <div className="absolute top-0 left-16">
+              <button>
+                <img src="info.svg" alt="Modal Icon" className="h-8" />
+              </button>
+            </div>
               <div className="max-w-sm  border border-gray-200 rounded-lg shadow  ">
                 <a href="#">
                   <img
@@ -141,7 +170,12 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="ps-14">
+            <div className="ps-14 relative">
+            <div className="absolute top-0 left-16">
+              <button>
+                <img src="info.svg" alt="Modal Icon" className="h-8" />
+              </button>
+            </div>
               <div className="max-w-sm  border border-gray-200 rounded-lg shadow  ">
                 <a href="#">
                   <img
@@ -166,6 +200,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+       
       </div>
     
   );

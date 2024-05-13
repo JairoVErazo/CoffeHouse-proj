@@ -11,9 +11,17 @@ const page = () => {
           className="text-center"
           style={{ fontSize: "45px", fontWeight: "bold", marginLeft: "40px" }}
         >
-          <div>
+          <div className="flex">
+          <div className="ml-52">
             <h1>PRODUCTOS</h1>
           </div>
+          <div className="">
+          <button className="ml-5"> 
+                <img src="mas.svg" alt="info" className="h-10" />
+              </button>
+          </div>
+          </div>
+          
         </h2>
         <div
           className="card rounded-xl"
@@ -32,7 +40,9 @@ const page = () => {
                   borderRadius: "100px",
                 }}
               >
-                <p
+                <div className="flex justify-center">
+                  <div className="ml-60">
+                  <p
                   style={{
                     textAlign: "center",
                     fontSize: "25px",
@@ -41,6 +51,18 @@ const page = () => {
                 >
                   Raspberry Cake
                 </p>
+                  </div>
+                
+                <div className="ml-32">
+                <button>
+                <img src="edit.svg" alt="editar" className="h-10" />
+              </button>
+              <button className="ml-5"> 
+                <img src="info2.svg" alt="info" className="h-10" />
+              </button>
+                </div>
+                </div>
+               
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <img
                     src={"/img/cheesecake.jpg"}
@@ -57,7 +79,7 @@ const page = () => {
                       textAlign: "center",
                       fontSize: "25px",
                       fontWeight: "bold",
-                      marginLeft: "100px",
+                      marginLeft: "75px",
                     }}
                   >
                     <p>Costo</p>
@@ -68,29 +90,19 @@ const page = () => {
                       textAlign: "center",
                       fontSize: "25px",
                       fontWeight: "bold",
-                      marginLeft: "100px",
+                      marginLeft: "50px",
                     }}
                   >
                     <p>$4.00</p>
                     <p>$5.00</p>
                   </div>
-                  <div
-                    style={{
-                      textAlign: "center",
-                      fontSize: "25px",
-                      fontWeight: "bold",
-                      marginLeft: "100px",
-                    }}
-                  >
-                    <p>Ingredientes</p>
-                    <div className="flex justify-center">
-                      <img
-                        src={"/img/UilSearchPlus.svg"}
-                        style={{ width: "50px" }}
-                      ></img>
-                    </div>
-                  </div>
+                 
                 </div>
+                <div className="justify-center flex text-xl font-bold">
+                <p className="text-center mr-20 ml-28">Categoria:</p>
+                <p className="text-center">Temporada:</p>
+                </div>
+                
               </div>
 
               <div
@@ -100,7 +112,9 @@ const page = () => {
                   borderRadius: "100px",
                 }}
               >
-                <p
+                <div className="flex justify-center">
+                  <div className="ml-60">
+                  <p
                   style={{
                     textAlign: "center",
                     fontSize: "25px",
@@ -109,6 +123,17 @@ const page = () => {
                 >
                   Raspberry Cake
                 </p>
+                  </div>
+                
+                <div className="ml-32">
+                <button>
+                <img src="edit.svg" alt="editar" className="h-10" />
+              </button>
+              <button className="ml-5"> 
+                <img src="info2.svg" alt="info" className="h-10" />
+              </button>
+                </div>
+                </div>
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <img
                     src={"/img/cheesecake.jpg"}
@@ -125,7 +150,7 @@ const page = () => {
                       textAlign: "center",
                       fontSize: "25px",
                       fontWeight: "bold",
-                      marginLeft: "100px",
+                      marginLeft: "75px",
                     }}
                   >
                     <p>Costo</p>
@@ -136,28 +161,16 @@ const page = () => {
                       textAlign: "center",
                       fontSize: "25px",
                       fontWeight: "bold",
-                      marginLeft: "100px",
+                      marginLeft: "50px",
                     }}
                   >
                     <p>$4.00</p>
                     <p>$5.00</p>
                   </div>
-                  <div
-                    style={{
-                      textAlign: "center",
-                      fontSize: "25px",
-                      fontWeight: "bold",
-                      marginLeft: "100px",
-                    }}
-                  >
-                    <p>Ingredientes</p>
-                    <div className="flex justify-center">
-                      <img
-                        src={"/img/UilSearchPlus.svg"}
-                        style={{ width: "50px" }}
-                      ></img>
-                    </div>
-                  </div>
+                </div>
+                <div className="justify-center flex text-xl font-bold">
+                <p className="text-center mr-20 ml-28">Categoria:</p>
+                <p className="text-center">Temporada:</p>
                 </div>
               </div>
             </div>
