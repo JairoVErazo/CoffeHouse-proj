@@ -1,370 +1,172 @@
+"use client";
 import React from "react";
+import { useState } from "react";
+import ModalCocina from "@/components/ModalcOCINA";
 
 const page = () => {
+  const [modal, setModal] = useState(false);
   return (
-    <div
-      className="flex justify-center"
-      style={{ color: "#94303c", display: "flex", alignItems: "center" }}
-    >
-      <div className="col-md-3">
-        <div
-          className="card"
-          style={{
-            borderRadius: "10px",
-            marginBottom: "20px",
-            backgroundColor: "#ffffff, 0.7",
-            padding: "50px",
-          }}
-        >
-          <div className="card-body">
-            <h2
-              className="text-center"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                fontSize: "45px",
-                fontWeight: "bold",
-                marginLeft: "40px",
-              }}
-            >
-              <div>
-                <h1>ORDEN SOFI</h1>
-              </div>
-              <div>
-                <h2
-                  style={{
-                    backgroundColor: "#94303c",
-                    color: "#ffffff",
-                    borderRadius: "25px",
-                    marginLeft: "10px",
-                    padding: "10px",
-                    fontSize: "30px",
-                  }}
-                >
-                  {" "}
-                  2:00{" "}
+    <>
+      <div className="flex justify-center">
+        <div className="flex   mb-56 mx-10 ancho-cocina overflow-x-scroll mt-5">
+          <div className="">
+            <div className="fondo-blanco py-10 px-20">
+              <div className="flex justify-center  items-center">
+                <h2 className="uppercase  font-bold text-4xl principal">
+                  Orden Sofi
                 </h2>
+                <div
+                  className="text-white text-4xl px-2 py-2 font-bold rounded-lg ml-7"
+                  style={{ backgroundColor: "#94303c" }}
+                >
+                  <p>1:00</p>
+                </div>
               </div>
-            </h2>
-            <div className="details">
-              <div
-                style={{
-                  padding: "30px",
-                  display: "flex",
-                  alignItems: "center",
-                  backgroundColor: "#ffffff",
-                  borderRadius: "25px",
-                }}
-              >
+              <div className="bg-white flex justify-center items-center px-28  mt-7 py-6 rounded-full  principal ">
+                <img src="/img/cake.png" alt="producto" className="borde-img" />
+                <p className="font-bold ml-5">Raspberry cake</p>
+                <div className="borde-numero ml-3">
+                  <p className="font-bold">2</p>
+                </div>
                 <img
-                  src={"/img/cake.png"}
-                  style={{ width: "100px", border: "5px solid #94303c" }}
-                  alt="cake"
+                  src="/img/masGrande.svg"
+                  width={50}
+                  alt="mas"
+                  className="ml-12 cursor-pointer"
+                  onClick={() => setModal(true)}
                 />
-                <div
-                  style={{
-                    marginLeft: "60px",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  <p>Raspberry Cake</p>
-                </div>
-                <div
-                  style={{
-                    marginLeft: "20px",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  <p style={{ padding: "3px", border: "2px solid #94303c" }}>
-                    1
-                  </p>
-                </div>
-                <div
-                  style={{
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    marginLeft: "50px",
-                  }}
-                >
-                  <img
-                    src={"/img/MdiPlusBox.svg"}
-                    style={{ width: "80px" }}
-                  ></img>
-                </div>
               </div>
-              <div
-                style={{
-                  padding: "30px",
-                  display: "flex",
-                  alignItems: "center",
-                  backgroundColor: "#ffffff",
-                  borderRadius: "25px",
-                }}
-              >
+              <div className="bg-white flex justify-center items-center px-28 mt-7 py-6 rounded-full principal ">
+                <img src="/img/cake.png" alt="producto" className="borde-img" />
+                <p className="font-bold ml-5">Raspberry cake</p>
+                <div className="borde-numero ml-3">
+                  <p className="font-bold">2</p>
+                </div>
                 <img
-                  src={"/img/CheeseCake.jpg"}
-                  style={{
-                    width: "100px",
-                    border: "5px solid #94303c",
-                    height: "100px",
-                  }}
-                  alt="cake"
+                  src="/img/masGrande.svg"
+                  width={50}
+                  alt="mas"
+                  className="ml-12 cursor-pointer"
+                  onClick={() => setModal(true)}
                 />
-                <div
-                  style={{
-                    marginLeft: "60px",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                  }}
+              </div>
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  className="px-10 text-white font-bold rounded-lg mt-10 py-2 botones"
                 >
-                  <p>CheeseCake</p>
-                </div>
+                  Ready
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="">
+            <div className="fondo-blanco ml-14 py-10 px-20">
+              <div className="flex justify-center  items-center">
+                <h2 className="uppercase  font-bold text-4xl principal">
+                  Orden Sofi
+                </h2>
                 <div
-                  style={{
-                    marginLeft: "50px",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                  }}
+                  className="text-white text-4xl px-2 py-2 font-bold rounded-lg ml-7"
+                  style={{ backgroundColor: "#94303c" }}
                 >
-                  <p style={{ padding: "3px", border: "2px solid #94303c" }}>
-                    1
-                  </p>
-                </div>
-                <div
-                  style={{
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    marginLeft: "50px",
-                  }}
-                >
-                  <img
-                    src={"/img/MdiPlusBox.svg"}
-                    style={{ width: "80px" }}
-                  ></img>
+                  <p>1:00</p>
                 </div>
               </div>
+              <div className="bg-white flex justify-center items-center px-28 mt-7 py-6 rounded-full principal ">
+                <img src="/img/cake.png" alt="producto" className="borde-img" />
+                <p className="font-bold ml-5">Raspberry cake</p>
+                <div className="borde-numero ml-3">
+                  <p className="font-bold">2</p>
+                </div>
 
-              <div
-                style={{
-                  padding: "30px",
-                  display: "flex",
-                  alignItems: "center",
-                  backgroundColor: "#ffffff",
-                  borderRadius: "25px",
-                }}
-              >
                 <img
-                  src={"/img/icedcoffe.jpg"}
-                  style={{ width: "100px", border: "5px solid #94303c" }}
-                  alt="cake"
+                  src="/img/masGrande.svg"
+                  width={50}
+                  alt="mas"
+                  className="ml-12 cursor-pointer"
+                  onClick={() => setModal(true)}
                 />
-                <div
-                  style={{
-                    marginLeft: "60px",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  <p>Iced Coffe</p>
+              </div>
+              <div className="bg-white flex justify-center items-center px-28 mt-7 py-6 rounded-full principal ">
+                <img src="/img/cake.png" alt="producto" className="borde-img" />
+                <p className="font-bold ml-5">Raspberry cake</p>
+                <div className="borde-numero ml-3">
+                  <p className="font-bold">2</p>
                 </div>
-                <div
-                  style={{
-                    marginLeft: "60px",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                  }}
+                <img
+                  src="/img/masGrande.svg"
+                  width={50}
+                  alt="mas"
+                  className="ml-12 cursor-pointer"
+                  onClick={() => setModal(true)}
+                />
+              </div>
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  className="px-10 text-white font-bold rounded-lg mt-10 py-2 botones"
                 >
-                  <p style={{ padding: "3px", border: "2px solid #94303c" }}>
-                    2
-                  </p>
-                </div>
-                <div
-                  style={{
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    marginLeft: "50px",
-                  }}
-                >
-                  <img
-                    src={"/img/MdiPlusBox.svg"}
-                    style={{ width: "80px" }}
-                  ></img>
-                </div>
+                  Ready
+                </button>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div className="col-md-3">
-        <div
-          className="card"
-          style={{
-            borderRadius: "10px",
-            marginBottom: "20px",
-            backgroundColor: "#ffffff, 0.7",
-          }}
-        >
-          <div className="card-body">
-            <h2
-              className="text-center"
-              style={{
-                display: "flex",
-                alignItems: "end",
-                fontSize: "45px",
-                fontWeight: "bold",
-                marginLeft: "40px",
-              }}
-            >
-              <div>
-                <h1>ORDEN MATEO</h1>
-              </div>
-              <div>
-                <h2
-                  style={{
-                    backgroundColor: "#94303c",
-                    color: "#ffffff",
-                    borderRadius: "25px",
-                    marginLeft: "10px",
-                    padding: "10px",
-                    fontSize: "30px",
-                  }}
-                >
-                  {" "}
-                  5:00{" "}
+          <div className="">
+            <div className="fondo-blanco ml-14 py-10 px-20">
+              <div className="flex justify-center  items-center">
+                <h2 className="uppercase  font-bold text-4xl principal">
+                  Orden Sofi
                 </h2>
-              </div>
-            </h2>
-            <div className="details">
-              <div
-                style={{
-                  padding: "30px",
-                  display: "flex",
-                  alignItems: "center",
-                  backgroundColor: "#ffffff",
-                  borderRadius: "25px",
-                }}
-              >
-                <img
-                  src={"/img/cake.png"}
-                  style={{ width: "100px", border: "5px solid #94303c" }}
-                  alt="cake"
-                />
                 <div
-                  style={{
-                    marginLeft: "60px",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                  }}
+                  className="text-white text-4xl px-2 py-2 font-bold rounded-lg ml-7"
+                  style={{ backgroundColor: "#94303c" }}
                 >
-                  <p>Raspberry Cake</p>
-                </div>
-                <div
-                  style={{
-                    marginLeft: "60px",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  <p style={{ padding: "3px", border: "2px solid #94303c" }}>
-                    2
-                  </p>
-                </div>
-                <div style={{ fontSize: "20px", fontWeight: "bold" }}>
-                  <img
-                    src={"/img/MdiPlusBox.svg"}
-                    style={{ width: "80px" }}
-                  ></img>
+                  <p>1:00</p>
                 </div>
               </div>
-              <div
-                style={{
-                  padding: "30px",
-                  display: "flex",
-                  alignItems: "center",
-                  backgroundColor: "#ffffff",
-                  borderRadius: "25px",
-                }}
-              >
+              <div className="bg-white flex justify-center items-center px-28 mt-7 py-6 rounded-full principal ">
+                <img src="/img/cake.png" alt="producto" className="borde-img" />
+                <p className="font-bold ml-5">Raspberry cake</p>
+                <div className="borde-numero ml-3">
+                  <p className="font-bold">2</p>
+                </div>
                 <img
-                  src={"/img/brownie.jpg"}
-                  style={{ width: "100px", border: "5px solid #94303c" }}
-                  alt="cake"
+                  src="/img/masGrande.svg"
+                  width={50}
+                  alt="mas"
+                  className="ml-12 cursor-pointer"
+                  onClick={() => setModal(true)}
                 />
-                <div
-                  style={{
-                    marginLeft: "60px",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  <p>Brownie Normal</p>
-                </div>
-                <div
-                  style={{
-                    marginLeft: "60px",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  <p style={{ padding: "3px", border: "2px solid #94303c" }}>
-                    1
-                  </p>
-                </div>
-                <div style={{ fontSize: "20px", fontWeight: "bold" }}>
-                  <img
-                    src={"/img/MdiPlusBox.svg"}
-                    style={{ width: "80px" }}
-                  ></img>
-                </div>
               </div>
-              <div
-                style={{
-                  padding: "30px",
-                  display: "flex",
-                  alignItems: "center",
-                  backgroundColor: "#ffffff",
-                  borderRadius: "25px",
-                }}
-              >
+              <div className="bg-white flex justify-center items-center px-28 mt-7 py-6 rounded-full principal ">
+                <img src="/img/cake.png" alt="producto" className="borde-img" />
+                <p className="font-bold ml-5">Raspberry cake</p>
+                <div className="borde-numero ml-3">
+                  <p className="font-bold">2</p>
+                </div>
                 <img
-                  src={"/img/americano.jpg"}
-                  style={{ width: "100px", border: "5px solid #94303c" }}
-                  alt="cake"
+                  src="/img/masGrande.svg"
+                  width={50}
+                  alt="mas"
+                  className="ml-12 cursor-pointer"
+                  onClick={() => setModal(true)}
                 />
-                <div
-                  style={{
-                    marginLeft: "60px",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                  }}
+              </div>
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  className="px-10 text-white font-bold rounded-lg mt-10 py-2 botones"
                 >
-                  <p> Café Americano</p>
-                </div>
-                <div
-                  style={{
-                    marginLeft: "60px",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  <p style={{ padding: "3px", border: "2px solid #94303c" }}>
-                    3
-                  </p>
-                </div>
-                <div style={{ fontSize: "20px", fontWeight: "bold" }}>
-                  <img
-                    src={"/img/MdiPlusBox.svg"}
-                    style={{ width: "80px" }}
-                  ></img>
-                </div>
+                  Ready
+                </button>
               </div>
             </div>
           </div>
         </div>
+        {modal && <ModalCocina setModal={setModal} />}
       </div>
-    </div>
+    </>
   );
 };
 
