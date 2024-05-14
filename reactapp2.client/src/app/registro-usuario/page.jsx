@@ -21,10 +21,8 @@ const page = () => {
     e.PreventDefault();
 
     setData(objInfo);
-<<<<<<< Updated upstream
-=======
+
     console.log(data);
->>>>>>> Stashed changes
 
     try {
       const response = await fetch("/Usuario/registro", {

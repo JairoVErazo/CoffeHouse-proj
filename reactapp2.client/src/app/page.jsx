@@ -18,9 +18,13 @@ export default function Home() {
           </div>
           <div className="w-1/2 px-14">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             <img src="img/img1.png" className="h-auto" alt="pastel" />
 =======
                       <img src="/img/img1.png" className="h-auto" alt="pastel" />
+>>>>>>> Stashed changes
+=======
+            <img src="img/img1.png" className="h-auto" alt="pastel" />
 >>>>>>> Stashed changes
           </div>
         </div>

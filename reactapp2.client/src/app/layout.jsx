@@ -19,7 +19,6 @@ export default function RootLayout({ children }) {
           backgroundImage: 'url("img/fondo.png")',
           backgroundSize: "cover",
           minHeight: "100vh",
-          color: "black",
         }}
       >
         <NavBarAdmin />
