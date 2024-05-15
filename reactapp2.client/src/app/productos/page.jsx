@@ -2,7 +2,6 @@
 import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
-
 import { useRouter } from "next/navigation";
 
 const page = () => {
@@ -20,7 +19,6 @@ const page = () => {
         setLoading(false);
       }
     };
-
     fetchData();
   }, []);
 
@@ -35,87 +33,20 @@ const page = () => {
           className="text-center"
           style={{ fontSize: "45px", fontWeight: "bold", marginLeft: "40px" }}
         >
-          <div>
-            <h1>PRODUCTOS</h1>
+          <div className="flex justify-center">
+            <div>
+              <h1>PRODUCTOS</h1>
+            </div>
+            <div className="">
+              <button
+                className="ml-5"
+                onClick={() => router.push("/productos/new")}
+              >
+                <img src="mas.svg" alt="info" className="h-10" />
+              </button>
+            </div>
           </div>
         </h2>
-        {data.map((producto) => {
-          return (
-            <>
-              <div
-                style={{
-                  padding: "30px",
-                  backgroundColor: "#ffffff",
-                  borderRadius: "100px",
-                  marginBottom: "40px",
-                }}
-              >
-                <p
-                  style={{
-                    textAlign: "center",
-                    fontSize: "25px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  {producto.nombreProducto}
-                </p>
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  <img
-                    src={"/img/cheesecake.jpg"}
-                    style={{
-                      width: "150px",
-                      height: "150px",
-                      border: "5px solid #94303c",
-                      marginLeft: "40px",
-                    }}
-                    alt="cake"
-                  />
-                  <div
-                    style={{
-                      textAlign: "center",
-                      fontSize: "25px",
-                      fontWeight: "bold",
-                      marginLeft: "100px",
-                    }}
-                  >
-                    <p>Costo</p>
-                    <p>Precio</p>
-                  </div>
-                  <div
-                    style={{
-                      textAlign: "center",
-                      fontSize: "25px",
-                      fontWeight: "bold",
-                      marginLeft: "100px",
-                    }}
-                  >
-                    {producto.recetas.map((receta) => (
-                      <p>{receta.costoTotal}</p>
-                    ))}
-                    <p>${producto.precio}</p>
-                  </div>
-                  <div
-                    style={{
-                      textAlign: "center",
-                      fontSize: "25px",
-                      fontWeight: "bold",
-                      marginLeft: "100px",
-                    }}
-                  >
-                    <p>Ingredientes</p>
-                    <div className="flex justify-center">
-                      <img
-                        src={"/img/UilSearchPlus.svg"}
-                        style={{ width: "50px" }}
-                      ></img>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </>
-          );
-        })}
-        =======
         <div
           className="card rounded-xl"
           style={{
