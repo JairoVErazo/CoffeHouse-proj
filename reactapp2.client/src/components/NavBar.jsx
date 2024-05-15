@@ -11,7 +11,7 @@ const NavBar = () => {
             <li>
               <a
                 href="#"
-                className="block py-2 px-3 text-rose-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-pink-950  text-xl"
+                className="block py-2 px-3 text-rose-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-pink-950  text-xl "
                 aria-current="page"
               >
                 Home
@@ -31,6 +31,14 @@ const NavBar = () => {
                 className="block py-2 px-3 text-rose-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-pink-950  text-xl"
               >
                 Pago
+              </a>
+            </li>
+            <li> 
+            <a
+                href="#"
+                className="block py-2 px-3 text-rose-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-pink-950  text-xl"
+              >
+                Empleado
               </a>
             </li>
           </ul>
