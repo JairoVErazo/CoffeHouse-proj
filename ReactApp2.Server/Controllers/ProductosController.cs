@@ -39,7 +39,20 @@ namespace CoffeHouse.Server.Controllers
 
             var productoPublico = mapper.Map<ProductoDTO>(producto);
 
+            productoPublico.Categoria = await _repositorioProductos.ObtenerNombreCategoria(producto.IdCategoria);
+
             return Ok(productoPublico);
+        }
+
+
+        [HttpGet]
+        [Route("categoria{id}")]
+        public async Task<IActionResult> ObtenerProductoPorCategoria(int id)
+        {
+            var productos = await _repositorioProductos.ObtenerProductosPorCategoria(id);
+
+
+            return Ok(productos);
         }
 
 
@@ -54,18 +67,18 @@ namespace CoffeHouse.Server.Controllers
 
 
         [HttpPut]
-        public async Task<IActionResult> EditarProducto(int id, [FromBody] CrearProductoRequest request)
+        public async Task<IActionResult> EditarProducto(int id, CrearProductoRequest request)
         {
-            var producto = await _repositorioProductos.ObtenerProductoDetalles(id);
-
-            producto.NombreProducto = request.NombreProducto;
-            producto.DeTemporada = request.DeTemporada;
-            producto.Disponible = request.Disponible;
-
-            producto.Descripcion = request.Descripcion;
-
+            var producto = await _repositorioProductos.EditarProducto(id, request);
             return Ok(producto);
 
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> EliminarProducto(int id)
+        {
+            MensajeRespuesta response = await _repositorioProductos.EliminarProducto(id);
+            return Ok(response);
         }
     }
 }

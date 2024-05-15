@@ -1,149 +1,134 @@
+"use client";
+import axios from "axios";
 import React from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+
 
 const page = () => {
+
+  const router= useRouter();
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/api/Ingrediente");
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  console.log(data);
   return (
     <div className="flex justify-center" style={{ color: "#94303c" }}>
       <div
-        className="col-md-6 py-16 rounded-md"
-        style={{ backgroundColor: "#f7f6f6" }}
+        className="flex mb-56 mx-10 ancho-cocina mt-5"
+        style={{ maxHeight: "600px", overflowY: "scroll" }}
       >
-        <h2
-          className="text-center"
-          style={{ fontSize: "45px", fontWeight: "bold", marginLeft: "40px" }}
-        >
-          <div>
-            <h1>INGREDIENTES</h1>
-          </div>
-        </h2>
-        <div
-          className="card rounded-xl"
-          style={{
-            marginBottom: "20px",
-            backgroundColor: "#ffffff, 0.7",
-            padding: "50px",
-          }}
-        >
-          <div className="card-body">
-            <div className="details space-y-11">
-              <div
-                style={{
-                  padding: "30px",
-                  backgroundColor: "#ffffff",
-                  borderRadius: "100px",
-                }}
-              >
-                <p
-                  style={{
-                    textAlign: "center",
-                    fontSize: "25px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Huevos
-                </p>
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  <img
-                    src={"/img/huevos.jpg"}
-                    style={{
-                      width: "150px",
-                      height: "150px",
-                      border: "5px solid #94303c",
-                      marginLeft: "40px",
-                    }}
-                    alt="cake"
-                  />
-                  <div
-                    style={{
-                      textAlign: "center",
-                      fontSize: "25px",
-                      fontWeight: "bold",
-                      marginLeft: "100px",
-                    }}
+        <div>
+          <div
+            className="col-md-6 py-16 rounded-md px-40"
+            style={{ backgroundColor: "#f7f6f6" }}
+          >
+            <h2
+              className="text-center"
+              style={{
+                fontSize: "45px",
+                fontWeight: "bold",
+                marginLeft: "40px",
+              }}
+            >
+              <div className="flex justify-center">
+                <div>
+                  <h1>Ingredientes</h1>
+                </div>
+                <div>
+                  <button
+                    className="ml-5"
+                    onClick={() => router.push("/ingredientes/new")}
                   >
-                    <div className="flex ">
-                      <p>Cantidad</p>
-                      <img
-                        src="/img/UilSearchPlus.svg"
-                        alt="ver mas"
-                        width={30}
-                        className="ms-2"
-                      />
-                    </div>
-
-                    <p>12</p>
-                  </div>
-                  <div
-                    style={{
-                      textAlign: "center",
-                      fontSize: "25px",
-                      fontWeight: "bold",
-                      marginLeft: "100px",
-                    }}
-                  >
-                    <p>Precio</p>
-                    <p>$5.00</p>
-                  </div>
+                    <img src="mas.svg" alt="info" className="h-10" />
+                  </button>
                 </div>
               </div>
-
-              <div
-                style={{
-                  padding: "30px",
-                  backgroundColor: "#ffffff",
-                  borderRadius: "100px",
-                }}
-              >
-                <p
-                  style={{
-                    textAlign: "center",
-                    fontSize: "25px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Huevos
-                </p>
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  <img
-                    src={"/img/huevos.jpg"}
-                    style={{
-                      width: "150px",
-                      height: "150px",
-                      border: "5px solid #94303c",
-                      marginLeft: "40px",
-                    }}
-                    alt="cake"
-                  />
-                  <div
-                    style={{
-                      textAlign: "center",
-                      fontSize: "25px",
-                      fontWeight: "bold",
-                      marginLeft: "100px",
-                    }}
-                  >
-                    <div className="flex ">
-                      <p>Cantidad</p>
-                      <img
-                        src="/img/UilSearchPlus.svg"
-                        alt="ver mas"
-                        width={30}
-                        className="ms-2"
-                      />
+            </h2>
+            <div
+              className="card rounded-xl"
+              style={{
+                marginBottom: "20px",
+                backgroundColor: "#ffffff, 0.7",
+                padding: "50px",
+              }}
+            >
+              <div className="card-body">
+                <div className="details space-y-11">
+                  {data.map((ingrediente) => (
+                    <div
+                      key={ingrediente.idIngrediente}
+                      style={{
+                        padding: "30px",
+                        backgroundColor: "#ffffff",
+                        borderRadius: "100px",
+                      }}
+                    >
+                      <div className="flex justify-center">
+                        <div className="ml-60">
+                          <p
+                            style={{
+                              textAlign: "center",
+                              fontSize: "30px",
+                              fontWeight: "bold",
+                            }}
+                          >
+                           {ingrediente.nombre}
+                          </p>
+                        </div>
+                        <div className="ml-32">
+                          <button
+                            onClick={() =>
+                              router.push(
+                              "/ingredientes/editar/" + ingrediente.idIngrediente
+                              )
+                            }
+                          >
+                            <img src="edit.svg" alt="editar" className="h-10" />
+                          </button>
+                          
+                        </div>
+                      </div>
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <img
+                          src={"/img/cheesecake.jpg"}
+                          style={{
+                            width: "150px",
+                            height: "150px",
+                            border: "5px solid #94303c",
+                            marginLeft: "40px",
+                          }}
+                          alt="cake"
+                        />
+                        <div className="justify-center flex text-xl font-bold">
+                        <div className="mr-20 ml-10">
+                          <p className="text-center mr-10 ml-6">Precio Unitario:</p>
+                          <p className="text-center">${ingrediente.precioUnitario}</p>
+                        </div>
+                        <div>
+                          <p className="text-center">Existencias:</p>
+                          <p className="text-center">
+                            {ingrediente.existencias} {ingrediente.unidadMedida}
+                          </p>
+                        </div>
+                      </div>
+                      </div>
+                     
                     </div>
-
-                    <p>12</p>
-                  </div>
-                  <div
-                    style={{
-                      textAlign: "center",
-                      fontSize: "25px",
-                      fontWeight: "bold",
-                      marginLeft: "100px",
-                    }}
-                  >
-                    <p>Precio</p>
-                    <p>$5.00</p>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
