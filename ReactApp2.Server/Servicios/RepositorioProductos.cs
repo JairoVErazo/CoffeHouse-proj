@@ -2,6 +2,7 @@
 using CoffeHouse.Server.Dto_s;
 using CoffeHouse.Server.Models;
 using CoffeHouse.Server.Models.Custom;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoffeHouse.Server.Servicios
@@ -14,6 +15,7 @@ namespace CoffeHouse.Server.Servicios
         Task<MensajeRespuesta> EliminarProducto(int id);
         Task<Producto> ObtenerProductoDetalles(int idProducto);
         Task<IEnumerable<ProductoDTO>> ObtenerProductos();
+        Task<IEnumerable<Producto>> ObtenerProductosPorCategoria(int idCategoria);
     }
     public class RepositorioProductos : IRepositorioProductos
     {
@@ -187,6 +189,19 @@ namespace CoffeHouse.Server.Servicios
                 Titulo = "El producto ha sido Eliminado con exito",
                 Mensaje = "ok"
             };
+
+        }
+
+
+        public async Task<IEnumerable<Producto>> ObtenerProductosPorCategoria(int idCategoria)
+        {
+            if(idCategoria is 0)
+            {
+                return null;
+            }
+            var productos = await _context.Productos.Where(i => i.IdCategoria == idCategoria).ToListAsync();
+
+            return productos;
 
         }
 
