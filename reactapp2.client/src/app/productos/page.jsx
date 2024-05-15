@@ -2,11 +2,9 @@
 import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
-<<<<<<< Updated upstream
-=======
+
 import { useRouter } from "next/navigation";
 
->>>>>>> Stashed changes
 const page = () => {
   const router = useRouter();
 
@@ -41,7 +39,6 @@ const page = () => {
             <h1>PRODUCTOS</h1>
           </div>
         </h2>
-<<<<<<< Updated upstream
         {data.map((producto) => {
           return (
             <>
@@ -118,7 +115,7 @@ const page = () => {
             </>
           );
         })}
-=======
+        =======
         <div
           className="card rounded-xl"
           style={{
@@ -228,7 +225,6 @@ const page = () => {
             </div>
           </div>
         </div>
->>>>>>> Stashed changes
       </div>
     </div>
   );
