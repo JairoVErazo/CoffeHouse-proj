@@ -24,7 +24,7 @@ namespace CoffeHouse.Server.Controllers
         }
 
 
-        [HttpPost("registro")]
+        [HttpPost]
 
         public async Task<IActionResult> RegistrarUsuario([FromBody] UsuarioDTO usuarioDTO)
         {
@@ -52,9 +52,14 @@ namespace CoffeHouse.Server.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(AutorizacionRequest request)
         {
-            var response = await _autorizacion.DevolverToken(request);
+            if(await _autorizacion.UsuarioEsActivo(request))
+            {
+                var response = await _autorizacion.DevolverToken(request);
 
-            return Ok(response);
+                return Ok(response);
+            }
+
+            return BadRequest(_autorizacion.CreateErrorResult("usuario inactivo", "Usuario inactivo, porfavor comuniquese con su gerente para activar su cuenta"));
         }
 
     }

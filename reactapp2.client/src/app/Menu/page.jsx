@@ -1,33 +1,36 @@
+
+ 
+
 export default function Home() {
+ 
   return (
-    <div className="flex flex-col items-center text-black">
-      <h1 className="text-rose-900 text-6xl text-center mb-20 font-semibold ">
-        Menú
-      </h1>
-      <div className="flex  mb-24">
-        <div className="w-3/12 px-14 mt-14 text-4xl text-rose-900 font-semibold">
-          <ul className="list-disc pl-4">
-            <li className="mb-8 hover:bg-pink-100 hover:rounded-full cursor-pointer">
-              Ice Coffe
+    <div className="flex flex-col items-center py-10">
+      <ul className="font-bold flex  p-4 mt-2 space-x-24  flex-row text-rose-900 text-4xl  mb-20 list-disc cursor-pointer">
+      <li className=" hover:text-pink-950">
+              Ice Coffe 
             </li>
-            <li className="mb-8 hover:bg-pink-100  hover:rounded-full cursor-pointer">
+            <li className=" hover:text-pink-950  ">
               Hot Coffe
             </li>
-            <li className="mb-8 hover:bg-pink-100  hover:rounded-full cursor-pointer">
+            <li className=" hover:text-pink-950  ">
               Dessert
             </li>
-            <li className="mb-8 hover:bg-pink-100  hover:rounded-full cursor-pointer">
-              Temporada
+            <li className=" hover:text-pink-950">
+              Temporada 
             </li>
-            <li className="mb-8 hover:bg-pink-100  hover:rounded-full cursor-pointer">
+            <li className=" hover:text-pink-950">
               Extras
             </li>
           </ul>
-        </div>
         <div className="">
-          <div className="w-2/12 flex">
-            <div className="pe-14">
-              <div className="max-w-sm  border border-gray-200 rounded-lg shadow  ">
+          <div className="flex mb-10">
+            <div className="pe-14 relative">
+            <div className="absolute top-0 left-2">
+              <button>
+                <img src="info.svg" alt="Modal Icon" className="h-8" />
+              </button>
+            </div>
+              <div className="max-w-sm  border border-gray-200 rounded-lg shadow ">
                 <a href="#">
                   <img
                     src="img/menu1.png"
@@ -37,7 +40,7 @@ export default function Home() {
                 </a>
                 <div className="p-5 bg-white">
                   <a href="#">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight  text-rose-900  justify-center text-center">
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight  text-rose-900 dark:text-white justify-center text-center">
                       Raberry Cake $4.99
                     </h5>
                   </a>
@@ -50,8 +53,13 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="px-14">
-              <div className="max-w-sm  border border-gray-200 rounded-lg shadow  ">
+            <div className="px-14 relative">
+            <div className="absolute top-0 left-16">
+              <button>
+                <img src="info.svg" alt="Modal Icon" className="h-8" />
+              </button>
+            </div>
+              <div className="max-w-sm  border border-gray-200 rounded-lg shadow ">
                 <a href="#">
                   <img
                     src="img/menu1.png"
@@ -61,7 +69,7 @@ export default function Home() {
                 </a>
                 <div className="p-5 bg-white">
                   <a href="#">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight  text-rose-900  justify-center text-center">
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight  text-rose-900 dark:text-white justify-center text-center">
                       Raberry Cake $4.99
                     </h5>
                   </a>
@@ -73,7 +81,12 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="ps-14">
+            <div className="ps-14 relative">
+            <div className="absolute top-0 left-16">
+              <button>
+                <img src="info.svg" alt="Modal Icon" className="h-8" />
+              </button>
+            </div>
               <div className="max-w-sm  border border-gray-200 rounded-lg shadow  ">
                 <a href="#">
                   <img
@@ -84,7 +97,7 @@ export default function Home() {
                 </a>
                 <div className="p-5 bg-white">
                   <a href="#">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight  text-rose-900 justify-center text-center">
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight  text-rose-900 dark:text-white justify-center text-center">
                       Raberry Cake $4.99
                     </h5>
                   </a>
@@ -99,9 +112,14 @@ export default function Home() {
           </div>
 
           {/* Fila nueva */}
-          <div className="w-2/12 flex mt-10">
-            <div className="pe-14">
-              <div className="max-w-sm  border border-gray-200 rounded-lg shadow  ">
+          <div className=" flex mt-10 mb-10">
+            <div className="pe-14 relative">
+            <div className="absolute top-0 left-2">
+              <button>
+                <img src="info.svg" alt="Modal Icon" className="h-8" />
+              </button>
+            </div>
+              <div className="max-w-sm  border border-gray-200 rounded-lg shadow ">
                 <a href="#">
                   <img
                     src="img/menu1.png"
@@ -111,7 +129,7 @@ export default function Home() {
                 </a>
                 <div className="p-5 bg-white">
                   <a href="#">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight  text-rose-900  justify-center text-center">
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight  text-rose-900 dark:text-white justify-center text-center">
                       Raberry Cake $4.99
                     </h5>
                   </a>
@@ -124,7 +142,12 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="px-14">
+            <div className="px-14 relative">
+            <div className="absolute top-0 left-16">
+              <button>
+                <img src="info.svg" alt="Modal Icon" className="h-8" />
+              </button>
+            </div>
               <div className="max-w-sm  border border-gray-200 rounded-lg shadow  ">
                 <a href="#">
                   <img
@@ -135,7 +158,7 @@ export default function Home() {
                 </a>
                 <div className="p-5 bg-white">
                   <a href="#">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight  text-rose-900  justify-center text-center">
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight  text-rose-900 dark:text-white justify-center text-center">
                       Raberry Cake $4.99
                     </h5>
                   </a>
@@ -147,7 +170,12 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="ps-14">
+            <div className="ps-14 relative">
+            <div className="absolute top-0 left-16">
+              <button>
+                <img src="info.svg" alt="Modal Icon" className="h-8" />
+              </button>
+            </div>
               <div className="max-w-sm  border border-gray-200 rounded-lg shadow  ">
                 <a href="#">
                   <img
@@ -158,12 +186,12 @@ export default function Home() {
                 </a>
                 <div className="p-5 bg-white">
                   <a href="#">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight  text-rose-900  justify-center text-center">
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight  text-rose-900 dark:text-white justify-center text-center">
                       Raberry Cake $4.99
                     </h5>
                   </a>
                   <div className="flex justify-center px-10">
-                    <img src="/mas.svg" alt="" className="h-12" />
+                    <img src="mas.svg" alt="" className="h-12" />
                     <h1 className="px-12 text-rose-900 text-2xl">1</h1>
                     <img src="img/menos.svg" alt="" className="h-12" />
                   </div>
@@ -172,7 +200,8 @@ export default function Home() {
             </div>
           </div>
         </div>
+       
       </div>
-    </div>
+    
   );
 }

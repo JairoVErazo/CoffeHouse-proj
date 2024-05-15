@@ -1,6 +1,6 @@
-import { useState } from "react";
+import React from "react";
 
-const ModalCocina = ({ setModal }) => {
+const ModalEditarProducto = ({ setModal, selected }) => {
   return (
     <div>
       <div className="fixed inset-0 bg-black bg-opacity-45 backdrop-blur-sm flex justify-center items-center">
@@ -12,7 +12,7 @@ const ModalCocina = ({ setModal }) => {
           </div>
           <div className="flex flex-col justify-center items-center gap-5">
             {/*  Este es lel contenido del modal */}
-            <h1>Receta</h1>
+            {selected && <h1>{selected.nombreProducto}</h1>}
           </div>
         </div>
       </div>
@@ -20,4 +20,4 @@ const ModalCocina = ({ setModal }) => {
   );
 };
 
-export default ModalCocina;
+export default ModalEditarProducto;

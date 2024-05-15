@@ -27,6 +27,8 @@ public partial class CoffehouseContext : DbContext
 
     public virtual DbSet<Ingrediente> Ingredientes { get; set; }
 
+    public virtual DbSet<MetodoPago> MetodoPagos { get; set; }
+
     public virtual DbSet<Orden> Ordens { get; set; }
 
     public virtual DbSet<PedidoIngrediente> PedidoIngredientes { get; set; }
@@ -59,7 +61,7 @@ public partial class CoffehouseContext : DbContext
         {
             entity
                 .HasNoKey()
-                .ToTable("DetalleOrden");
+                .ToTable("DetalleOrden", tb => tb.HasTrigger("ActualizarInventario"));
 
             entity.Property(e => e.PrecioTotal).HasColumnType("money");
 
@@ -76,7 +78,13 @@ public partial class CoffehouseContext : DbContext
 
         modelBuilder.Entity<DetalleRecetum>(entity =>
         {
-            entity.HasNoKey();
+            entity
+                .HasNoKey()
+                .ToTable(tb =>
+                {
+                    tb.HasTrigger("trg_ActualizarCostoTotalReceta");
+                    tb.HasTrigger("trg_CalcularCostoPorPorcion");
+                });
 
             entity.Property(e => e.CantidadUnidades).HasColumnType("decimal(18, 0)");
             entity.Property(e => e.CostoPerPorcion).HasColumnType("money");
@@ -109,12 +117,20 @@ public partial class CoffehouseContext : DbContext
 
             entity.ToTable("Factura");
 
+            entity.Property(e => e.IdMetodopago).HasColumnName("id_metodopago");
             entity.Property(e => e.Total).HasColumnType("money");
+
+            entity.HasOne(d => d.IdMetodopagoNavigation).WithMany(p => p.Facturas)
+                .HasForeignKey(d => d.IdMetodopago)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Factura_MetodoPago");
         });
 
         modelBuilder.Entity<Ingrediente>(entity =>
         {
             entity.HasKey(e => e.IdIngrediente);
+
+            entity.ToTable(tb => tb.HasTrigger("trg_ActualizarCostoPorPorcion"));
 
             entity.Property(e => e.Existencias).HasColumnType("decimal(18, 0)");
             entity.Property(e => e.Nombre)
@@ -123,6 +139,18 @@ public partial class CoffehouseContext : DbContext
             entity.Property(e => e.PrecioUnitario).HasColumnType("money");
             entity.Property(e => e.UnidadMedida)
                 .HasMaxLength(10)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<MetodoPago>(entity =>
+        {
+            entity.HasKey(e => e.IdMetodopago).HasName("PK__MetodoPa__47952DC932DBAE4E");
+
+            entity.ToTable("MetodoPago");
+
+            entity.Property(e => e.IdMetodopago).HasColumnName("id_metodopago");
+            entity.Property(e => e.Metodo)
+                .HasMaxLength(50)
                 .IsUnicode(false);
         });
 
@@ -152,6 +180,8 @@ public partial class CoffehouseContext : DbContext
         {
             entity.HasKey(e => e.IdPedido);
 
+            entity.ToTable(tb => tb.HasTrigger("trg_ActualizarExistencias"));
+
             entity.Property(e => e.PrecioUnitario).HasColumnType("money");
 
             entity.HasOne(d => d.IdIngredienteNavigation).WithMany(p => p.PedidoIngredientes)
@@ -167,6 +197,7 @@ public partial class CoffehouseContext : DbContext
             entity.Property(e => e.NombreProducto)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.Precio).HasColumnType("money");
 
             entity.HasOne(d => d.IdCategoriaNavigation).WithMany(p => p.Productos)
                 .HasForeignKey(d => d.IdCategoria)
