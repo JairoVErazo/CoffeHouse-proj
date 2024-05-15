@@ -43,6 +43,16 @@ namespace CoffeHouse.Server.Controllers
         }
 
 
+        [HttpGet]
+        [Route("categoria{id}")]
+        public async Task<IActionResult> ObtenerProductoPorCategoria(int id)
+        {
+            var productos = await _repositorioProductos.ObtenerProductosPorCategoria(id);
+
+            return Ok(productos);
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> CrearProducto(CrearProductoRequest request)
         {
