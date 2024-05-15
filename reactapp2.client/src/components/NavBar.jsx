@@ -2,8 +2,13 @@ const NavBar = () => {
   return (
     <nav style={{ backgroundColor: "transparent" }}>
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+<<<<<<< Updated upstream
         <a className="flex items-center space-x-3 rtl:space-x-reverse">
           <img src="img/LogoCafe.png" className="h-36" alt="Logo" />
+=======
+        <a className="flex justify-start space-x-28">
+          <img src="/img/LogoCafe.png" className="h-36" alt="Logo" />
+>>>>>>> Stashed changes
         </a>
 
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
@@ -26,8 +31,16 @@ const NavBar = () => {
               </a>
             </li>
             <li>
+<<<<<<< Updated upstream
               <a href="#">
                 <img src="img/carrito.svg" alt="carrito" className="h-8" />
+=======
+              <a
+                href="#"
+                className="block py-2 px-3 text-rose-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-pink-950  text-xl"
+              >
+                Pago
+>>>>>>> Stashed changes
               </a>
             </li>
           </ul>
