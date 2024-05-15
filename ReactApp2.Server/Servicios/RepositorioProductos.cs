@@ -11,6 +11,7 @@ namespace CoffeHouse.Server.Servicios
         Task<string> CargarImagen(IFormFile file);
         Task<Producto> CrearProducto(CrearProductoRequest producto);
         Task<Producto> EditarProducto(int id, CrearProductoRequest producto);
+        Task<MensajeRespuesta> EliminarProducto(int id);
         Task<Producto> ObtenerProductoDetalles(int idProducto);
         Task<IEnumerable<ProductoDTO>> ObtenerProductos();
     }
@@ -151,6 +152,36 @@ namespace CoffeHouse.Server.Servicios
             await _context.SaveChangesAsync();
 
             return producto;
+
+        }
+
+
+        public MensajeRespuesta CreateErrorResult(string titulo, string message)
+        {
+            return new MensajeRespuesta
+            {
+                Tipo = null,
+                Titulo = titulo ,
+                Mensaje = message
+            };
+        }
+
+        public async Task<MensajeRespuesta> EliminarProducto(int id)
+        {
+            var producto = await _context.Productos.FindAsync(id);
+            var recetas = await _context.Recetas.Where(r => r.IdProducto == id).FirstAsync();
+
+            await _context.DetalleReceta.Where(p => p.IdRecetas == recetas.IdReceta).ExecuteDeleteAsync();
+            _context.Recetas.Remove(recetas);
+             _context.Productos.Remove(producto);
+            await _context.SaveChangesAsync();
+
+            return new MensajeRespuesta
+            {
+                Tipo = producto.NombreProducto,
+                Titulo = "El producto ha sido Eliminado con exito",
+                Mensaje = "ok"
+            };
 
         }
 

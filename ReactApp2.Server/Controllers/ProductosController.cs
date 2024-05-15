@@ -60,5 +60,12 @@ namespace CoffeHouse.Server.Controllers
             return Ok(producto);
 
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> EliminarProducto(int id)
+        {
+            MensajeRespuesta response = await _repositorioProductos.EliminarProducto(id);
+            return Ok(response);
+        }
     }
 }
