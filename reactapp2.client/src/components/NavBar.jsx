@@ -3,7 +3,7 @@ const NavBar = () => {
     <nav style={{ backgroundColor: "transparent" }}>
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a className="flex justify-start space-x-28">
-          <img src="img/LogoCafe.png" className="h-36" alt="Logo" />
+          <img src="/img/LogoCafe.png" className="h-36" alt="Logo" />
         </a>
 
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
