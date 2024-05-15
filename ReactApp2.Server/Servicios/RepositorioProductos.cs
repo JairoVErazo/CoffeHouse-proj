@@ -13,6 +13,7 @@ namespace CoffeHouse.Server.Servicios
         Task<Producto> CrearProducto(CrearProductoRequest producto);
         Task<Producto> EditarProducto(int id, CrearProductoRequest producto);
         Task<MensajeRespuesta> EliminarProducto(int id);
+        Task<string> ObtenerNombreCategoria(int id);
         Task<Producto> ObtenerProductoDetalles(int idProducto);
         Task<IEnumerable<ProductoDTO>> ObtenerProductos();
         Task<IEnumerable<Producto>> ObtenerProductosPorCategoria(int idCategoria);
@@ -64,7 +65,6 @@ namespace CoffeHouse.Server.Servicios
             var producto = await _context.Productos
                 .Where(p => p.IdProducto == idProducto)
                 .Include(p => p.Receta)
-                .Include(c => c.IdCategoriaNavigation.NombreCategoria)
                 .FirstOrDefaultAsync();
 
             return producto;
