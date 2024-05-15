@@ -17,7 +17,9 @@ const page = ({ params }) => {
     fetchData();
   }, []);
   console.log(data);
-  return <div></div>;
+  return <div>
+    <h2>info jeje</h2>
+  </div>;
 };
 
 export default page;
