@@ -10,8 +10,9 @@ namespace CoffeHouse.Server.Servicios
     {
         Task<string> CargarImagen(IFormFile file);
         Task<Producto> CrearProducto(CrearProductoRequest producto);
+        Task<Producto> EditarProducto(CrearProductoRequest producto);
         Task<Producto> ObtenerProductoDetalles(int idProducto);
-        Task<IEnumerable<Producto>> ObtenerProductos();
+        Task<IEnumerable<ProductoDTO>> ObtenerProductos();
     }
     public class RepositorioProductos : IRepositorioProductos
     {
@@ -25,20 +26,42 @@ namespace CoffeHouse.Server.Servicios
             _mapper = mapper;
         }
 
+        public async Task<string> ObtenerNombreCategoria(int id)
+        {
+           var cateogria = await _context.CategoriaProductos.Where(c => c.IdCategoria == id).FirstAsync();
 
+           string nombre = cateogria.NombreCategoria;
 
-        public async Task<IEnumerable<Producto>> ObtenerProductos()
+           return nombre;
+    
+        }
+
+        public async Task<IEnumerable<ProductoDTO>> ObtenerProductos()
         {
             var products = await _context.Productos.Include(p => p.Receta).ToListAsync();
 
-            return products;
+            List<ProductoDTO>productoResponse = new();
+            foreach (var producto in products)
+            {
+                ProductoDTO productoDTO = _mapper.Map<ProductoDTO>(producto);
+
+                productoDTO.Categoria = await ObtenerNombreCategoria(productoDTO.IdCategoria);
+
+                productoResponse.Add(productoDTO);
+            }
+
+
+            return productoResponse;
         }
+           
+        
 
         public async Task<Producto> ObtenerProductoDetalles(int idProducto)
         {
             var producto = await _context.Productos
                 .Where(p => p.IdProducto == idProducto)
-                .Include(p => p.Receta) 
+                .Include(p => p.Receta)
+                .Include(c => c.IdCategoriaNavigation.NombreCategoria)
                 .FirstOrDefaultAsync();
 
             return producto;
@@ -81,6 +104,28 @@ namespace CoffeHouse.Server.Servicios
             await _context.SaveChangesAsync();
 
             return nuevoProduct;
+        }
+
+
+        public async Task<Producto> EditarProducto(CrearProductoRequest producto)
+        {
+            string rutaImagen = await CargarImagen(producto.Imagen);
+
+            var productoActualizado = new Producto()
+            {
+                IdCategoria = producto.IdCategoria,
+                NombreProducto = producto.NombreProducto,
+                DeTemporada = producto.DeTemporada,
+                Disponible = producto.Disponible,
+                Imagen = rutaImagen,
+                Descripcion = producto.Descripcion,
+            };
+
+             _context.Productos.Update(productoActualizado);
+            await _context.SaveChangesAsync();
+
+            return productoActualizado;
+
         }
 
     }

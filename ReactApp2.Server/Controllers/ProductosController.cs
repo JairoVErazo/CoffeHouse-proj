@@ -27,9 +27,8 @@ namespace CoffeHouse.Server.Controllers
         {
             var productos = await _repositorioProductos.ObtenerProductos();
 
-            var listarProductos = mapper.Map<IEnumerable<ProductoDTO>>(productos);
 
-            return Ok(listarProductos);
+            return Ok(productos);
         }
 
         [HttpGet]
@@ -51,6 +50,22 @@ namespace CoffeHouse.Server.Controllers
             var nuevoProducto = await _repositorioProductos.CrearProducto(request);
 
             return Ok(nuevoProducto);
+        }
+
+
+        [HttpPut]
+        public async Task<IActionResult> EditarProducto(int id, [FromBody] CrearProductoRequest request)
+        {
+            var producto = await _repositorioProductos.ObtenerProductoDetalles(id);
+
+            producto.NombreProducto = request.NombreProducto;
+            producto.DeTemporada = request.DeTemporada;
+            producto.Disponible = request.Disponible;
+
+            producto.Descripcion = request.Descripcion;
+
+            return Ok(producto);
+
         }
     }
 }
