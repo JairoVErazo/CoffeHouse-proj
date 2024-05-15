@@ -10,7 +10,8 @@ namespace CoffeHouse.Server.Servicios
     {
         Task<string> CargarImagen(IFormFile file);
         Task<Producto> CrearProducto(CrearProductoRequest producto);
-        Task<Producto> EditarProducto(CrearProductoRequest producto);
+        Task<Producto> EditarProducto(int id, CrearProductoRequest producto);
+        Task<MensajeRespuesta> EliminarProducto(int id);
         Task<Producto> ObtenerProductoDetalles(int idProducto);
         Task<IEnumerable<ProductoDTO>> ObtenerProductos();
     }
@@ -107,24 +108,85 @@ namespace CoffeHouse.Server.Servicios
         }
 
 
-        public async Task<Producto> EditarProducto(CrearProductoRequest producto)
+        public async Task<Producto> EditarProducto(int id, CrearProductoRequest request)
         {
-            string rutaImagen = await CargarImagen(producto.Imagen);
+            var producto = await _context.Productos.Where(c => c.IdProducto == id).FirstAsync();
+            string rutaImagen = string.Empty;
 
-            var productoActualizado = new Producto()
+
+            if (request.Imagen is not null)
             {
-                IdCategoria = producto.IdCategoria,
-                NombreProducto = producto.NombreProducto,
-                DeTemporada = producto.DeTemporada,
-                Disponible = producto.Disponible,
-                Imagen = rutaImagen,
-                Descripcion = producto.Descripcion,
-            };
+                rutaImagen = await CargarImagen(request.Imagen);
+            }
 
-             _context.Productos.Update(productoActualizado);
+            if(request.IdCategoria is 0)
+            {
+                request.IdCategoria = producto.IdCategoria; 
+            }
+
+            rutaImagen = producto.Imagen;
+
+            // Obtener propiedades del objeto request
+            var requestPropiedad = request.GetType().GetProperties();
+
+            // Recorrer las propiedades del request
+            foreach (var property in requestPropiedad)
+            {
+                // Obtener el nombre de la propiedad
+                var NombrePropiedad = property.Name;
+
+                // Obtener el valor de la propiedad
+                var requestPropiedadValor = property.GetValue(request);
+
+
+                var productoProperty = producto.GetType().GetProperty(NombrePropiedad);
+
+                // Verificar si la propiedad del producto existe
+                if (productoProperty != null)
+                {
+                    // Verificar si el valor del request es nulo
+                    if (requestPropiedadValor != null)
+                    {
+
+                        productoProperty.SetValue(producto, requestPropiedadValor);
+                    }
+                }
+
+            }
+                _context.Productos.Update(producto);
             await _context.SaveChangesAsync();
 
-            return productoActualizado;
+            return producto;
+
+        }
+
+
+        public MensajeRespuesta CreateErrorResult(string titulo, string message)
+        {
+            return new MensajeRespuesta
+            {
+                Tipo = null,
+                Titulo = titulo ,
+                Mensaje = message
+            };
+        }
+
+        public async Task<MensajeRespuesta> EliminarProducto(int id)
+        {
+            var producto = await _context.Productos.FindAsync(id);
+            var recetas = await _context.Recetas.Where(r => r.IdProducto == id).FirstAsync();
+
+            await _context.DetalleReceta.Where(p => p.IdRecetas == recetas.IdReceta).ExecuteDeleteAsync();
+            _context.Recetas.Remove(recetas);
+             _context.Productos.Remove(producto);
+            await _context.SaveChangesAsync();
+
+            return new MensajeRespuesta
+            {
+                Tipo = producto.NombreProducto,
+                Titulo = "El producto ha sido Eliminado con exito",
+                Mensaje = "ok"
+            };
 
         }
 
