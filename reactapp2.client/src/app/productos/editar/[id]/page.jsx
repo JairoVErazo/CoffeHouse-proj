@@ -17,6 +17,7 @@ const page = ({ params }) => {
 
     fetchData();
   }, []);
+
   console.log(data);
   return <div>Editar</div>;
 };
