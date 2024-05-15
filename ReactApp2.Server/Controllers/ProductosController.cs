@@ -39,6 +39,8 @@ namespace CoffeHouse.Server.Controllers
 
             var productoPublico = mapper.Map<ProductoDTO>(producto);
 
+            productoPublico.Categoria = await _repositorioProductos.ObtenerNombreCategoria(producto.IdCategoria);
+
             return Ok(productoPublico);
         }
 
@@ -48,6 +50,7 @@ namespace CoffeHouse.Server.Controllers
         public async Task<IActionResult> ObtenerProductoPorCategoria(int id)
         {
             var productos = await _repositorioProductos.ObtenerProductosPorCategoria(id);
+
 
             return Ok(productos);
         }
