@@ -119,6 +119,11 @@ namespace CoffeHouse.Server.Servicios
                 rutaImagen = await CargarImagen(request.Imagen);
             }
 
+            if(request.IdCategoria is 0)
+            {
+                request.IdCategoria = producto.IdCategoria; 
+            }
+
             rutaImagen = producto.Imagen;
 
             // Obtener propiedades del objeto request
