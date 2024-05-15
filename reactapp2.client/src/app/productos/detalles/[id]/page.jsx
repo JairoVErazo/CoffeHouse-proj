@@ -36,6 +36,7 @@ const page = ({ params }) => {
           <h2 className="text-white font-bold text-center text-xl py-5">
             {data.disponible ? "SI" : "NO"}
           </h2>
+          <img src={`https://localhost:7195/${data.imagen}`} alt={data.nombreProducto} />
         </div>
       </div>
     </div>

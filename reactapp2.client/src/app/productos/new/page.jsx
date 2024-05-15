@@ -1,9 +1,8 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
 
-const page = () => {
+const Page = () => {
   const [formData, setFormData] = useState({
     idCategoria: 0,
     nombreProducto: "",
@@ -14,31 +13,37 @@ const page = () => {
   });
 
   const handleChange = (e) => {
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
     setFormData({
       ...formData,
-      [e.target.id]: e.target.value,
+      [e.target.id]: value,
+    });
+  };
+
+  const handleImageChange = (e) => {
+    setFormData({
+      ...formData,
+      imagen: e.target.files[0]
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const disponible = formData.disponible === "true";
-    const deTemporada = formData.deTemporada === "true";
     const idCategoria = parseInt(formData.idCategoria);
 
     if (isNaN(idCategoria)) {
       console.error("El campo 'id categoria' debe ser un número válido.");
       return;
     }
-    const dataToSend = {
-      idCategoria: 1,
-      nombreProducto: "caramelo",
-      descripcion: "Hola",
-      disponible: true,
-      deTemporada: true,
-      imagen: imagen,
-    };
-    console.log(dataToSend);
+
+    const dataToSend = new FormData();
+    dataToSend.append("idCategoria", formData.idCategoria);
+    dataToSend.append("nombreProducto", formData.nombreProducto);
+    dataToSend.append("descripcion", formData.descripcion);
+    dataToSend.append("disponible", formData.disponible);
+    dataToSend.append("deTemporada", formData.deTemporada);
+    dataToSend.append("imagen", formData.imagen);
+
     try {
       const response = await axios.post("/api/Productos", dataToSend, {
         headers: {
@@ -53,38 +58,36 @@ const page = () => {
 
   return (
     <div className="flex justify-center items-center">
-      <div style={{ backgroundColor: "#bb8b90" }} className="rounded-lg ">
-        <div className="py-9 px-44 ">
+      <div style={{ backgroundColor: "#bb8b90" }} className="rounded-lg">
+        <div className="py-9 px-44">
           <h2 className="text-white font-bold text-center text-5xl">
             Crear Nuevo Producto
           </h2>
         </div>
         <form
-          className="mt-5 flex flex-col  items-center mb-10"
+          className="mt-5 flex flex-col items-center mb-10"
           onSubmit={handleSubmit}
         >
           <div className="flex space-x-10">
-            <div>
-              <div className="flex flex-col ">
-                <label
-                  htmlFor=""
-                  className="uppercase  text-white font-extrabold"
-                >
-                  IdCategoria
-                </label>
-                <input
-                  id="idCategoria"
-                  type="number"
-                  className="w-80 h-8 rounded-lg border-none"
-                  style={{ backgroundColor: "#dfdfdf" }}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <div className="flex flex-col ">
+            <div className="flex flex-col">
               <label
-                htmlFor=""
-                className="uppercase  text-white font-extrabold"
+                htmlFor="idCategoria"
+                className="uppercase text-white font-extrabold"
+              >
+                IdCategoria
+              </label>
+              <input
+                id="idCategoria"
+                type="number"
+                className="w-80 h-8 rounded-lg border-none"
+                style={{ backgroundColor: "#dfdfdf" }}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="flex flex-col">
+              <label
+                htmlFor="nombreProducto"
+                className="uppercase text-white font-extrabold"
               >
                 Nombre
               </label>
@@ -99,29 +102,27 @@ const page = () => {
           </div>
 
           <div className="flex space-x-10 mt-10">
-            <div>
-              <div className="flex flex-col ">
-                <label
-                  htmlFor=""
-                  className="uppercase  text-white font-extrabold"
-                >
-                  Temporada
-                </label>
-                <select
-                  className="w-80 rounded-lg h-8 border-none"
-                  style={{ backgroundColor: "#dfdfdf" }}
-                  id="deTemporada"
-                  onChange={handleChange}
-                >
-                  <option value={true}>Si</option>
-                  <option value={false}>No</option>
-                </select>
-              </div>
-            </div>
-            <div className="flex flex-col ">
+            <div className="flex flex-col">
               <label
-                htmlFor=""
-                className="uppercase  text-white font-extrabold"
+                htmlFor="deTemporada"
+                className="uppercase text-white font-extrabold"
+              >
+                Temporada
+              </label>
+              <select
+                className="w-80 rounded-lg h-8 border-none"
+                style={{ backgroundColor: "#dfdfdf" }}
+                id="deTemporada"
+                onChange={handleChange}
+              >
+                <option value={true}>Si</option>
+                <option value={false}>No</option>
+              </select>
+            </div>
+            <div className="flex flex-col">
+              <label
+                htmlFor="disponible"
+                className="uppercase text-white font-extrabold"
               >
                 Disponible
               </label>
@@ -138,34 +139,35 @@ const page = () => {
           </div>
 
           <div className="flex mt-10">
-            <div>
-              <div className="flex flex-col mr-72">
-                <label
-                  htmlFor=""
-                  className="uppercase  text-white font-extrabold"
-                >
-                  Descripción
-                </label>
-                <input
-                  id="descripcion"
-                  type="text"
-                  className="w-96 h-20 rounded-lg border-none"
-                  style={{ backgroundColor: "#dfdfdf" }}
-                  onChange={handleChange}
-                />
-              </div>
+            <div className="flex flex-col mr-72">
+              <label
+                htmlFor="descripcion"
+                className="uppercase text-white font-extrabold"
+              >
+                Descripción
+              </label>
+              <input
+                id="descripcion"
+                type="text"
+                className="w-96 h-20 rounded-lg border-none"
+                style={{ backgroundColor: "#dfdfdf" }}
+                onChange={handleChange}
+              />
             </div>
           </div>
-          <div className="flex flex-col ">
-            <label htmlFor="" className="uppercase  text-white font-extrabold">
-              imagen
+          <div className="flex flex-col">
+            <label
+              htmlFor="imagen"
+              className="uppercase text-white font-extrabold"
+            >
+              Imagen
             </label>
             <input
               id="imagen"
               type="file"
               className="w-80 h-8 rounded-lg border-none"
               style={{ backgroundColor: "#dfdfdf" }}
-              onChange={handleChange}
+              onChange={handleImageChange}
             />
           </div>
 
@@ -181,4 +183,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
