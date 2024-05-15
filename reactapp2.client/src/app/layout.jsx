@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
       <body
         className={monse.className}
         style={{
-          backgroundImage: 'url("img/fondo.png")',
+          backgroundImage: 'url("/img/fondo.png")',
           backgroundSize: "cover",
           minHeight: "100vh",
         }}

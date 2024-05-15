@@ -3,7 +3,7 @@ const NavBar = () => {
     <nav style={{ backgroundColor: "transparent" }}>
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a className="flex justify-start space-x-28">
-          <img src="img/LogoCafe.png" className="h-36" alt="Logo" />
+          <img src="/img/LogoCafe.png" className="h-36" alt="Logo" />
         </a>
 
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
@@ -11,7 +11,7 @@ const NavBar = () => {
             <li>
               <a
                 href="#"
-                className="block py-2 px-3 text-rose-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-pink-950  text-xl"
+                className="block py-2 px-3 text-rose-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-pink-950  text-xl "
                 aria-current="page"
               >
                 Home
@@ -31,6 +31,14 @@ const NavBar = () => {
                 className="block py-2 px-3 text-rose-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-pink-950  text-xl"
               >
                 Pago
+              </a>
+            </li>
+            <li> 
+            <a
+                href="#"
+                className="block py-2 px-3 text-rose-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-pink-950  text-xl"
+              >
+                Empleado
               </a>
             </li>
           </ul>
