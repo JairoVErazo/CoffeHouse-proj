@@ -1,51 +1,33 @@
 "use client";
 import { useState } from "react";
-const page = () => {
-  const [nombre, setNombre] = useState();
-  const [apellido, setApellido] = useState();
-  const [nombreUsuario, setNombreUsuario] = useState();
-  const [password, setPassword] = useState();
-  const [estado, setEstado] = useState();
-  const [idRol, setIdRol] = useState();
-  const [data, setData] = useState();
+import axios from "axios";
 
-  const objInfo = {
-    nombre,
-    apellido,
-    nombreUsuario,
-    password,
-    estado,
-    idRol,
-  };
+const Page = () => {
+  const [nombre, setNombre] = useState("");
+  const [apellido, setApellido] = useState("");
+  const [nombreUsuario, setNombreUsuario] = useState("");
+  const [contraseña, setContraseña] = useState("");
+  const [estado, setEstado] = useState(true);
+  const [idRol, setIdRol] = useState(0);
+
   const handleSubmit = async (e) => {
-    e.PreventDefault();
-
-    setData(objInfo);
-
-    console.log(data);
+    e.preventDefault();
 
     try {
-      const response = await fetch("/Usuario/registro", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ key: "value" }),
+      const response = await axios.post("/api/Usuario", {
+        Nombre: nombre,
+        Apellido: apellido,
+        NombreUsuario: nombreUsuario,
+        Contraseña: contraseña,
+        Estado: estado,
+        IdRol: idRol,
       });
-    } catch (error) {}
-  };
-  /* const { register, handleSubmit } = useForm();
-  const onSubmit = async (data) => {
-    const res = await fetch("/Usuario/registro", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    });
-    const resJSON = await res.json();
-    /* console.log(resJSON); */
-  /*if (res.ok) {
-      router.push("/auth/login");
-    }
-  }; */
 
+      console.log("Usuario registrado:", response.data);
+    } catch (error) {
+      console.error("Error al registrar usuario:", error);
+    }
+  };
   return (
     <div className="flex justify-center items-center">
       <div style={{ backgroundColor: "#bb8b90" }} className="rounded-lg ">
@@ -55,8 +37,8 @@ const page = () => {
           </h2>
         </div>
         <form
-          onSubmit={handleSubmit}
           className="mt-5 flex flex-col  items-center mb-10"
+          onSubmit={handleSubmit}
         >
           <div className="flex space-x-10">
             <div>
@@ -69,11 +51,9 @@ const page = () => {
                 </label>
                 <input
                   type="text"
+                  onChange={(e) => setNombre(e.target.value)}
                   className="w-80  rounded-lg border-none"
                   style={{ backgroundColor: "#dfdfdf" }}
-                  onChange={(e) => {
-                    setNombre(e.target.value);
-                  }}
                 />
               </div>
             </div>
@@ -86,11 +66,9 @@ const page = () => {
               </label>
               <input
                 type="text"
+                onChange={(e) => setApellido(e.target.value)}
                 className="w-80  rounded-lg border-none"
                 style={{ backgroundColor: "#dfdfdf" }}
-                onChange={(e) => {
-                  setApellido(e.target.value);
-                }}
               />
             </div>
           </div>
@@ -106,11 +84,9 @@ const page = () => {
                 </label>
                 <input
                   type="text"
+                  onChange={(e) => setNombreUsuario(e.target.value)}
                   className="w-80  rounded-lg border-none"
                   style={{ backgroundColor: "#dfdfdf" }}
-                  onChange={(e) => {
-                    setNombreUsuario(e.target.value);
-                  }}
                 />
               </div>
             </div>
@@ -119,15 +95,13 @@ const page = () => {
                 htmlFor=""
                 className="uppercase  text-white font-extrabold"
               >
-                contraseña
+                Contraseña
               </label>
               <input
                 type="password"
+                onChange={(e) => setContraseña(e.target.value)}
                 className="w-80  rounded-lg border-none"
                 style={{ backgroundColor: "#dfdfdf" }}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
               />
             </div>
           </div>
@@ -141,14 +115,17 @@ const page = () => {
                 >
                   Estado
                 </label>
-                <input
-                  type="text"
-                  className="w-80  rounded-lg border-none"
+                <select
+                  value={estado ? "activo" : "inactivo"}
+                  onChange={(e) =>
+                    setEstado(e.target.value === "activo" ? true : false)
+                  }
+                  className="w-80 rounded-lg border-none"
                   style={{ backgroundColor: "#dfdfdf" }}
-                  onChange={(e) => {
-                    setEstado(e.target.value);
-                  }}
-                />
+                >
+                  <option value="activo">Activo</option>
+                  <option value="inactivo">Inactivo</option>
+                </select>
               </div>
             </div>
             <div className="flex flex-col ">
@@ -159,12 +136,10 @@ const page = () => {
                 Rol
               </label>
               <input
-                type="text"
+                type="number"
                 className="w-80  rounded-lg border-none"
+                onChange={(e) => setIdRol(e.target.value)}
                 style={{ backgroundColor: "#dfdfdf" }}
-                onChange={(e) => {
-                  setIdRol(e.target.value);
-                }}
               />
             </div>
           </div>
@@ -181,4 +156,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
