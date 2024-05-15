@@ -10,7 +10,7 @@ namespace CoffeHouse.Server.Servicios
     {
         Task<string> CargarImagen(IFormFile file);
         Task<Producto> CrearProducto(CrearProductoRequest producto);
-        Task<Producto> EditarProducto(CrearProductoRequest producto);
+        Task<Producto> EditarProducto(int id, CrearProductoRequest producto);
         Task<Producto> ObtenerProductoDetalles(int idProducto);
         Task<IEnumerable<ProductoDTO>> ObtenerProductos();
     }
@@ -107,24 +107,50 @@ namespace CoffeHouse.Server.Servicios
         }
 
 
-        public async Task<Producto> EditarProducto(CrearProductoRequest producto)
+        public async Task<Producto> EditarProducto(int id, CrearProductoRequest request)
         {
-            string rutaImagen = await CargarImagen(producto.Imagen);
+            var producto = await _context.Productos.Where(c => c.IdProducto == id).FirstAsync();
+            string rutaImagen = string.Empty;
 
-            var productoActualizado = new Producto()
+
+            if (request.Imagen is not null)
             {
-                IdCategoria = producto.IdCategoria,
-                NombreProducto = producto.NombreProducto,
-                DeTemporada = producto.DeTemporada,
-                Disponible = producto.Disponible,
-                Imagen = rutaImagen,
-                Descripcion = producto.Descripcion,
-            };
+                rutaImagen = await CargarImagen(request.Imagen);
+            }
 
-             _context.Productos.Update(productoActualizado);
+            rutaImagen = producto.Imagen;
+
+            // Obtener propiedades del objeto request
+            var requestPropiedad = request.GetType().GetProperties();
+
+            // Recorrer las propiedades del request
+            foreach (var property in requestPropiedad)
+            {
+                // Obtener el nombre de la propiedad
+                var NombrePropiedad = property.Name;
+
+                // Obtener el valor de la propiedad
+                var requestPropiedadValor = property.GetValue(request);
+
+
+                var productoProperty = producto.GetType().GetProperty(NombrePropiedad);
+
+                // Verificar si la propiedad del producto existe
+                if (productoProperty != null)
+                {
+                    // Verificar si el valor del request es nulo
+                    if (requestPropiedadValor != null)
+                    {
+
+                        productoProperty.SetValue(producto, requestPropiedadValor);
+                    }
+                }
+
+            }
+                _context.Productos.Update(producto);
             await _context.SaveChangesAsync();
 
-            return productoActualizado;
+            return producto;
 
         }
 
