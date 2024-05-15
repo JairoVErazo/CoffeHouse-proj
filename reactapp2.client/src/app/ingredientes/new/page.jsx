@@ -5,7 +5,7 @@ const page = () => {
   <div style={{ backgroundColor: "#bb8b90" }} className="rounded-lg ">
     <div className="py-9 px-44 ">
       <h2 className="text-white font-bold text-center text-5xl">
-        Agregar Nuevo Producto
+        Agregar nuevo Ingrediente
       </h2>
     </div>
     <form
