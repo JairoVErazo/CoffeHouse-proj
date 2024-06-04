@@ -7,9 +7,7 @@ import { useRouter } from "next/navigation";
 
 
 const page = () => {
-
   const router= useRouter();
-
   const [data, setData] = useState([]);
 
   useEffect(() => {
