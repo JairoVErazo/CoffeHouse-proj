@@ -13,7 +13,8 @@ const Page = () => {
   });
 
   const handleChange = (e) => {
-    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
     setFormData({
       ...formData,
       [e.target.id]: value,
@@ -23,7 +24,7 @@ const Page = () => {
   const handleImageChange = (e) => {
     setFormData({
       ...formData,
-      imagen: e.target.files[0]
+      imagen: e.target.files[0],
     });
   };
 
@@ -76,14 +77,19 @@ const Page = () => {
               >
                 IdCategoria
               </label>
-              <input
+              <select
                 id="idCategoria"
-                type="number"
                 className="w-80 h-8 rounded-lg border-none"
                 style={{ backgroundColor: "#dfdfdf" }}
                 onChange={handleChange}
-              />
+              >
+                <option value="">categoría</option>
+                <option value="1">Categoría 1</option>
+                <option value="2">Categoría 2</option>
+                <option value="3">Categoría 3</option>
+              </select>
             </div>
+
             <div className="flex flex-col">
               <label
                 htmlFor="nombreProducto"
