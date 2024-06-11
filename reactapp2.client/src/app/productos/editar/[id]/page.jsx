@@ -44,7 +44,7 @@ const Page = ({ params }) => {
 
     try {
         console.log("Datos antes de enviar", dataToSend);
-        const response = await axios.put(`/api/Productos${params.id}`, dataToSend, {
+        const response = await axios.put(`/api/Productos?id=${params.id}`, dataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
