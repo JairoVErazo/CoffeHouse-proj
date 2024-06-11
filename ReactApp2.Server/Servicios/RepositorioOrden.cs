@@ -27,13 +27,13 @@ namespace CoffeHouse.Server.Servicios
 
         public async Task<IEnumerable<Orden>> ObtenerOrden()
         {
-            var ordenes = await _context.Ordens.ToListAsync();
+            var ordenes = await _context.Orden.ToListAsync();
             return ordenes;
         }
 
         public async Task<Orden> ObtenerOrdenbyId(int id)
         {
-            var orden = await _context.Ordens.FindAsync(id);
+            var orden = await _context.Orden.FindAsync(id);
             return orden;
         }
 
