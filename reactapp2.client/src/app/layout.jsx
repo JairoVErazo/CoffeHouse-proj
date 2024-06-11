@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
           minHeight: "100vh",
         }}
       >
-        <NavBar/>
+        <NavBarAdmin/>
         {children}
       </body>
     </html>
