@@ -17,7 +17,7 @@ public partial class CoffehouseContext : DbContext
 
     public virtual DbSet<CategoriaProducto> CategoriaProductos { get; set; }
 
-    public virtual DbSet<DetalleOrden> DetalleOrdens { get; set; }
+    public virtual DbSet<DetalleOrden> DetalleOrden { get; set; }
 
     public virtual DbSet<DetalleRecetum> DetalleReceta { get; set; }
 
@@ -29,7 +29,7 @@ public partial class CoffehouseContext : DbContext
 
     public virtual DbSet<MetodoPago> MetodoPagos { get; set; }
 
-    public virtual DbSet<Orden> Ordens { get; set; }
+    public virtual DbSet<Orden> Orden { get; set; }
 
     public virtual DbSet<PedidoIngrediente> PedidoIngredientes { get; set; }
 
@@ -59,22 +59,27 @@ public partial class CoffehouseContext : DbContext
 
         modelBuilder.Entity<DetalleOrden>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("DetalleOrden", tb => tb.HasTrigger("ActualizarInventario"));
+           
+            entity.HasKey(d => new { d.IdReceta, d.IdOrden });
 
             entity.Property(e => e.PrecioTotal).HasColumnType("money");
 
-            entity.HasOne(d => d.IdOrdenNavigation).WithMany()
+            
+            entity.HasOne(d => d.IdOrdenNavigation)
+                .WithMany()
                 .HasForeignKey(d => d.IdOrden)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_DetalleOrden_Orden");
 
-            entity.HasOne(d => d.IdRecetaNavigation).WithMany()
+         
+            entity.HasOne(d => d.IdRecetaNavigation)
+                .WithMany()
                 .HasForeignKey(d => d.IdReceta)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_DetalleOrden_Recetas");
         });
+
+
 
         modelBuilder.Entity<DetalleRecetum>(entity =>
         {

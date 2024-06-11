@@ -1,8 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { useRouter } from "next/navigation";
 const Page = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     idCategoria: 0,
     nombreProducto: "",
@@ -73,6 +74,7 @@ const Page = () => {
         },
       });
       console.log(response.data);
+      router.push(`/productos/recetas/${response.data.idProducto}`);
     } catch (error) {
       console.error("Error al enviar el formulario:", error);
     }

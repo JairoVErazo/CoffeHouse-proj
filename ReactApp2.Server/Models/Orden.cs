@@ -23,7 +23,8 @@ public partial class Orden
 
     public decimal PrecioFinal { get; set; }
 
-    public virtual EstadoOrden IdEstadoNavigation { get; set; } = null!;
-
-    public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
+    public virtual EstadoOrden? IdEstadoNavigation { get; set; }
+  
+    public virtual Usuario? IdUsuarioNavigation { get; set; }
+   
 }

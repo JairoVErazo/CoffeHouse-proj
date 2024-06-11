@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Page = () => {
-  const { cart } = useStore();
+  const cart = useStore((state) => state.cart);
+  const idOrden = useStore((state) => state.idOrden);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -27,7 +28,7 @@ const Page = () => {
     }
   }, [cart]);
 
-  console.log(data);
+  console.log(idOrden);
 
   return (
     <div>
@@ -117,11 +118,6 @@ const Page = () => {
                                       {" "}
                                       ${producto.precio}
                                     </p>
-
-                                    <img
-                                      src={"/img/Trash.svg"}
-                                      style={{ width: "40px" }}
-                                    />
                                   </div>
                                 </div>
                               </div>
@@ -147,6 +143,14 @@ const Page = () => {
               </li>
             ))}
           </ul>
+          <div className="flex justify-center mt-4">
+            {idOrden && (
+              <div className="text-black font-bold">
+                ID de la Orden: {idOrden}
+              </div>
+            )}
+          </div>
+
           <div className="flex justify-center">
             <button
               type="button"
