@@ -37,9 +37,7 @@ const Pagina = () => {
   };
 
   const agregarPedido = () => {
-    // Aquí puedes manejar el guardado del pedido, por ejemplo, enviándolo a una API o guardándolo en la base de datos
-    console.log("Pedido guardado:", cart);
-    clearCart();
+    router.push("/crear-orden");
   };
 
   return (

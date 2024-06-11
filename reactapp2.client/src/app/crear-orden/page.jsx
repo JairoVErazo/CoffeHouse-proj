@@ -2,8 +2,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import useStore from "@/data/store";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     nombreCliente: "",
     comentarios: "",
@@ -39,6 +41,7 @@ const Page = () => {
           idUsuario: formData.idUsuario,
         });
         setIdOrden(response.data);
+        router.push("/orden");
       } else {
         setError("Hubo un problema al enviar la orden");
       }

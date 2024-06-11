@@ -17,7 +17,7 @@ public partial class CoffehouseContext : DbContext
 
     public virtual DbSet<CategoriaProducto> CategoriaProductos { get; set; }
 
-    public virtual DbSet<DetalleOrden> DetalleOrdens { get; set; }
+    public virtual DbSet<DetalleOrden> DetalleOrden { get; set; }
 
     public virtual DbSet<DetalleRecetum> DetalleReceta { get; set; }
 
