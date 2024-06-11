@@ -24,7 +24,7 @@ namespace CoffeHouse.Server.Servicios
 
         public async Task<IEnumerable<DetalleOrden>> ObtenerDetalleOrden()
         {
-            var detalleorden = await _context.DetalleOrdens.ToListAsync();
+            var detalleorden = await _context.DetalleOrden.ToListAsync();
             return detalleorden;
         }
 
