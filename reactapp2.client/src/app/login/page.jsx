@@ -1,16 +1,15 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
 
-const page = () => {
+const LoginPage = () => {
   const [data, setData] = useState({});
-  const [nombreUsuario, setNombreUsuario] = useState();
-  const [password, setPassword] = useState();
+  const [nombreUsuario, setNombreUsuario] = useState("");
+  const [password, setPassword] = useState("");
 
   const login = async (credentials) => {
     try {
-      const response = await axios.post("api/Usuario/Login", credentials);
+      const response = await axios.post("/api/Usuario/Login", credentials);
       if (response.status === 200) {
         localStorage.setItem("token", response.data.token);
         console.log(response);
@@ -76,4 +75,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default LoginPage;
