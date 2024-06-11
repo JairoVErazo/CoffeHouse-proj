@@ -111,14 +111,13 @@ const page = () => {
                       </div>
                       <div style={{ display: "flex", alignItems: "center" }}>
                         <img
-                          src={"/img/cheesecake.jpg"}
+                          src="/img/cheesecake.jpg"
                           style={{
                             width: "150px",
                             height: "150px",
                             border: "5px solid #94303c",
                             marginLeft: "40px",
                           }}
-                          alt="cake"
                         />
                         <div
                           style={{
