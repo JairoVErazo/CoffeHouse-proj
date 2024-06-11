@@ -22,7 +22,7 @@ namespace CoffeHouse.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CrearReceta(Receta request)
+        public async Task<IActionResult> CrearReceta(Recetarequest request)
         {
             var nuevaReceta = await _repositorioReceta.CrearReceta(request);
             return Ok(nuevaReceta);
