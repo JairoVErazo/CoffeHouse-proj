@@ -9,6 +9,7 @@ const Page = ({ params }) => {
     deTemporada: false,
     disponible: false,
     descripcion: "",
+    precio: 0,
   });
 
   useEffect(() => {
@@ -41,14 +42,19 @@ const Page = ({ params }) => {
     dataToSend.append("descripcion", data.descripcion);
     dataToSend.append("disponible", data.disponible);
     dataToSend.append("deTemporada", data.deTemporada);
+    dataToSend.append("precio", data.precio);
 
     try {
-        console.log("Datos antes de enviar", dataToSend);
-        const response = await axios.put(`/api/Productos?id=${params.id}`, dataToSend, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      console.log("Datos antes de enviar", dataToSend);
+      const response = await axios.put(
+        `/api/Productos?id=${params.id}`,
+        dataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       console.log("Data updated successfully:", response.dataToSend);
       alert("Datos editados correctamente");
     } catch (error) {
@@ -147,25 +153,38 @@ const Page = ({ params }) => {
               </select>
             </div>
           </div>
-
-          <div className="flex mt-10">
-            <div>
-              <div className="flex flex-col mr-72">
-                <label
-                  htmlFor="descripcion"
-                  className="uppercase text-white font-extrabold"
-                >
-                  Descripción
-                </label>
-                <input
-                  type="text"
-                  name="descripcion"
-                  className="w-96 h-20 rounded-lg border-none px-6"
-                  style={{ backgroundColor: "#dfdfdf" }}
-                  value={data.descripcion}
-                  onChange={handleChange}
-                />
-              </div>
+          <div className="flex space-x-10 mt-10">
+            <div className="flex flex-col ">
+              <label
+                htmlFor="precio"
+                className="uppercase text-white font-extrabold"
+              >
+                Precio
+              </label>
+              <input
+                type="number"
+                name="precio"
+                className="w-80 h-8 rounded-lg border-none px-6"
+                style={{ backgroundColor: "#dfdfdf" }}
+                value={data.precio}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="flex flex-col mr-72">
+              <label
+                htmlFor="descripcion"
+                className="uppercase text-white font-extrabold"
+              >
+                Descripción
+              </label>
+              <input
+                type="text"
+                name="descripcion"
+                className="w-96 h-20 rounded-lg border-none px-6"
+                style={{ backgroundColor: "#dfdfdf" }}
+                value={data.descripcion}
+                onChange={handleChange}
+              />
             </div>
           </div>
 
