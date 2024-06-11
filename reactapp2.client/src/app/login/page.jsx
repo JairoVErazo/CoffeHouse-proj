@@ -15,6 +15,8 @@ const LoginPage = () => {
       const response = await axios.post("/api/Usuario/Login", credentials);
       if (response.status === 200) {
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("id_usuario", response.data.id);
+        localStorage.setItem("rol", response.data.rol);
         console.log(response.data);
         router.push("/home");
       } else {
