@@ -3,37 +3,39 @@ using CoffeHouse.Server.Models;
 using AutoMapper;
 using CoffeHouse.Server.Dto_s;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace CoffeHouse.Server.Servicios
 {
     public interface IRepositorioReceta
     {
         Task<IEnumerable<RecetaDTO>> ObtenerReceta();
-        Task<Receta> CrearReceta(CrearRecetaRequest receta);
+        Task<Receta> CrearReceta(Receta receta);
     }
+
     public class RepositorioReceta : IRepositorioReceta
     {
         private readonly CoffehouseContext _context;
         private readonly IMapper _mapper;
 
-        public RepositorioReceta(CoffehouseContext context,
-                                   IMapper mapper)
+        public RepositorioReceta(CoffehouseContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        public async Task<Receta> CrearReceta(CrearRecetaRequest receta)
+        public async Task<Receta> CrearReceta(Receta receta)
         {
-
-            var nuevaReceta = new Receta()
+            var nuevaReceta = new Receta
             {
                 Nombre = receta.Nombre,
                 Descripcion = receta.Descripcion,
                 Porciones = receta.Porciones,
-                CostoTotal = receta.CostoTotal,
+                CostoTotal = 0,
                 IdProducto = receta.IdProducto
-                
             };
 
             await _context.AddAsync(nuevaReceta);
@@ -42,11 +44,14 @@ namespace CoffeHouse.Server.Servicios
             return nuevaReceta;
         }
 
-        public Task<IEnumerable<RecetaDTO>> ObtenerReceta()
+        public Task<Receta> CrearReceta(CrearRecetaRequest receta)
         {
             throw new NotImplementedException();
         }
 
-        
+        public Task<IEnumerable<RecetaDTO>> ObtenerReceta()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
