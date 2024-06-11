@@ -5,6 +5,7 @@ const useStore = create(
   persist(
     (set) => ({
       cart: {},
+      idOrden: null,
       addToCart: (product) =>
         set((state) => {
           const newCart = { ...state.cart };
@@ -22,6 +23,8 @@ const useStore = create(
           return { cart: newCart };
         }),
       clearCart: () => set(() => ({ cart: {} })),
+      setIdOrden: (idOrden) => set(() => ({ idOrden })),
+      clearIdOrden: () => set(() => ({ idOrden: null })),
     }),
     {
       name: "cart-storage", // nombre del almacenamiento en localStorage
