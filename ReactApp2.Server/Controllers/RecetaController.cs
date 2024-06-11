@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using CoffeHouse.Server.Dto_s;
+using CoffeHouse.Server.Models.Custom;
 using CoffeHouse.Server.Servicios;
 using COFFEHOUSE.Server.Servicios;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoffeHouse.Server.Controllers
 {
@@ -12,6 +15,7 @@ namespace CoffeHouse.Server.Controllers
     {
         private readonly IRepositorioReceta _repositorioReceta;
         private readonly IMapper _mapper;
+        private object _context;
 
         public RecetaController(IRepositorioReceta repositorioReceta,
                                  IMapper mapper)
@@ -20,8 +24,16 @@ namespace CoffeHouse.Server.Controllers
             _mapper = mapper;
         }
 
-        
+      
 
+        [HttpPost]
+        public async Task<IActionResult> CrearReceta(CrearRecetaRequest request)
+        {
+
+            var nuevaReceta = await _repositorioReceta.CrearReceta(request);
+
+            return Ok(nuevaReceta);
+        }
 
 
     }
