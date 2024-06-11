@@ -1,4 +1,6 @@
-﻿using CoffeHouse.Server.Models;
+﻿using AutoMapper;
+using CoffeHouse.Server.Dto_s;
+using CoffeHouse.Server.Models;
 using CoffeHouse.Server.Servicios;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +27,14 @@ namespace CoffeHouse.Server.Controllers
             return Ok(ingredientes);
         }
 
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> ObtenerDetalleProducto(int id)
+        {
+            var ingrediente = await _repositorioIngredientes.ObtenerIngredienteDetalles(id);
+
+            return Ok(ingrediente);
+        }
 
         [HttpPost]
         public async Task<IActionResult> CrearIngrediente(Ingrediente request)

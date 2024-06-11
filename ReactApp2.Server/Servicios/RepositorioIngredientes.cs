@@ -10,6 +10,7 @@ namespace CoffeHouse.Server.Servicios
     {
         Task<Ingrediente> CrearIngrediente(Ingrediente ingrediente);
         Task<IEnumerable<Ingrediente>> ObtenerIngredientes();
+        Task<Ingrediente> ObtenerIngredienteDetalles(int idIngrediente);
     }
     public class RepositorioIngredientes: IRepositorioIngredientes
     {
@@ -30,6 +31,14 @@ namespace CoffeHouse.Server.Servicios
             return ingredientes;
         }
 
+        public async Task<Ingrediente> ObtenerIngredienteDetalles(int idIngrediente)
+        {
+            var ingrediente = await _context.Ingredientes
+                .Where(p => p.IdIngrediente == idIngrediente)
+                .FirstOrDefaultAsync();
+
+            return ingrediente;
+        }
         public async Task<Ingrediente> CrearIngrediente(  Ingrediente ingrediente )
         {
             
