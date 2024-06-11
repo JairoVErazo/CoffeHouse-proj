@@ -1,14 +1,22 @@
 "use client";
 import { Montserrat } from "next/font/google";
-import { usePathname } from "next/navigation";
-import NavBar from "@/Components/NavBar";
-import "./globals.css";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
 import NavBarAdmin from "@/Components/NavBarAdmin";
+import "./globals.css";
 
 const monse = Montserrat({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token && pathname !== "/login") {
+      router.push("/login");
+    }
+  }, [pathname, router]);
 
   // Si la ruta es '/login', no aplicamos el layout
   if (pathname === "/login") {
