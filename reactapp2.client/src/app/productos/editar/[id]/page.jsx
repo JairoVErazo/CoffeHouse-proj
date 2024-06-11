@@ -2,91 +2,73 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const Page = () => {
-  const [formData, setFormData] = useState({
-    idCategoria: 0,
+const Page = ({ params }) => {
+  const [data, setData] = useState({
+    idCategoria: "",
     nombreProducto: "",
     deTemporada: false,
     disponible: false,
     descripcion: "",
-    imagen: null,
+    precio: 0,
   });
 
   useEffect(() => {
-    
-    const fetchProducto = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get(`/api/Productos/${id}`);
-        const producto = response.data;
-
-   
-        setFormData({
-          idProducto: producto.idProducto,
-          idCategoria: producto.idCategoria,
-          nombreProducto: producto.nombreProducto,
-          deTemporada: producto.deTemporada,
-          disponible: producto.disponible,
-          descripcion: producto.descripcion,
-          imagen: null, 
-        });
+        const response = await axios.get(`/api/Productos/${params.id}`);
+        setData(response.data);
       } catch (error) {
-        console.error("Error al obtener el producto:", error);
+        console.error("Error fetching data:", error);
       }
     };
 
-    fetchProducto();
-  }, []); 
+    fetchData();
+  }, [params.id]);
 
   const handleChange = (e) => {
-    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-    setFormData({
-      ...formData,
-      [e.target.id]: value,
-    });
-  };
-
-  const handleImageChange = (e) => {
-    setFormData({
-      ...formData,
-      imagen: e.target.files[0]
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      [name]: value === "true" ? true : value === "false" ? false : value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const idCategoria = parseInt(formData.idCategoria);
-
-    if (isNaN(idCategoria)) {
-      console.error("El campo 'id categoria' debe ser un número válido.");
-      return;
-    }
 
     const dataToSend = new FormData();
-    dataToSend.append("idCategoria", formData.idCategoria);
-    dataToSend.append("nombreProducto", formData.nombreProducto);
-    dataToSend.append("descripcion", formData.descripcion);
-    dataToSend.append("disponible", formData.disponible);
-    dataToSend.append("deTemporada", formData.deTemporada);
-    dataToSend.append("imagen", formData.imagen);
+    dataToSend.append("idCategoria", data.idCategoria);
+    dataToSend.append("nombreProducto", data.nombreProducto);
+    dataToSend.append("descripcion", data.descripcion);
+    dataToSend.append("disponible", data.disponible);
+    dataToSend.append("deTemporada", data.deTemporada);
+    dataToSend.append("precio", data.precio);
 
     try {
-      const response = await axios.put(`/api/Productos/${id}`, dataToSend, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log(response.data);
+      console.log("Datos antes de enviar", dataToSend);
+      const response = await axios.put(
+        `/api/Productos?id=${params.id}`,
+        dataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("Data updated successfully:", response.dataToSend);
+      alert("Datos editados correctamente");
     } catch (error) {
-      console.error("Error al enviar el formulario:", error);
+      console.error("Error updating data:", error);
     }
   };
 
   return (
     <div className="flex justify-center items-center">
-      <div style={{ backgroundColor: "#bb8b90" }} className="rounded-lg">
-        <div className="py-9 px-44">
+      <div style={{ backgroundColor: "#bb8b90" }} className="rounded-lg ">
+        <div className="py-9 px-44 ">
+          <h2 className="text-white font-bold text-center text-5xl">Editar</h2>
           <h2 className="text-white font-bold text-center text-5xl">
-             Producto
+            Nombre del producto
           </h2>
         </div>
         <form
@@ -94,23 +76,26 @@ const Page = () => {
           onSubmit={handleSubmit}
         >
           <div className="flex space-x-10">
-            <div className="flex flex-col">
-              <label
-                htmlFor="idCategoria"
-                className="uppercase text-white font-extrabold"
-              >
-                IdCategoria
-              </label>
-              <input
-                id="idCategoria"
-                type="number"
-                className="w-80 h-8 rounded-lg border-none"
-                style={{ backgroundColor: "#dfdfdf" }}
-                value={formData.idCategoria}
-                onChange={handleChange}
-              />
+            <div>
+              <div className="flex flex-col ">
+                <label
+                  htmlFor="idCategoria"
+                  className="uppercase text-white font-extrabold"
+                >
+                  IdCategoria
+                </label>
+                <input
+                  type="text"
+                  name="idCategoria"
+                  className="w-80 h-8 rounded-lg border-none px-6"
+                  style={{ backgroundColor: "#dfdfdf" }}
+                  value={data.idCategoria}
+                  onChange={handleChange}
+                  disabled
+                />
+              </div>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col ">
               <label
                 htmlFor="nombreProducto"
                 className="uppercase text-white font-extrabold"
@@ -118,36 +103,38 @@ const Page = () => {
                 Nombre
               </label>
               <input
-                id="nombreProducto"
                 type="text"
-                className="w-80 h-8 rounded-lg border-none"
+                name="nombreProducto"
+                className="w-80 h-8 rounded-lg border-none px-6"
                 style={{ backgroundColor: "#dfdfdf" }}
-                value={formData.nombreProducto}
+                value={data.nombreProducto}
                 onChange={handleChange}
               />
             </div>
           </div>
 
           <div className="flex space-x-10 mt-10">
-            <div className="flex flex-col">
-              <label
-                htmlFor="deTemporada"
-                className="uppercase text-white font-extrabold"
-              >
-                Temporada
-              </label>
-              <select
-                className="w-80 rounded-lg h-8 border-none"
-                style={{ backgroundColor: "#dfdfdf" }}
-                id="deTemporada"
-                value={formData.deTemporada}
-                onChange={handleChange}
-              >
-                <option value={true}>Si</option>
-                <option value={false}>No</option>
-              </select>
+            <div>
+              <div className="flex flex-col ">
+                <label
+                  htmlFor="deTemporada"
+                  className="uppercase text-white font-extrabold"
+                >
+                  Temporada
+                </label>
+                <select
+                  name="deTemporada"
+                  className="w-80 h-8 rounded-lg border-none px-6"
+                  style={{ backgroundColor: "#dfdfdf" }}
+                  value={data.deTemporada}
+                  onChange={handleChange}
+                >
+                  <option value="true">Sí</option>
+                  <option value="false">No</option>
+                </select>
+              </div>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col ">
               <label
                 htmlFor="disponible"
                 className="uppercase text-white font-extrabold"
@@ -155,19 +142,34 @@ const Page = () => {
                 Disponible
               </label>
               <select
-                className="w-80 rounded-lg h-8 border-none"
+                name="disponible"
+                className="w-80 h-8 rounded-lg border-none px-6"
                 style={{ backgroundColor: "#dfdfdf" }}
-                id="disponible"
-                value={formData.disponible}
+                value={data.disponible}
                 onChange={handleChange}
               >
-                <option value={true}>Si</option>
-                <option value={false}>No</option>
+                <option value="true">Sí</option>
+                <option value="false">No</option>
               </select>
             </div>
           </div>
-
-          <div className="flex mt-10">
+          <div className="flex space-x-10 mt-10">
+            <div className="flex flex-col ">
+              <label
+                htmlFor="precio"
+                className="uppercase text-white font-extrabold"
+              >
+                Precio
+              </label>
+              <input
+                type="number"
+                name="precio"
+                className="w-80 h-8 rounded-lg border-none px-6"
+                style={{ backgroundColor: "#dfdfdf" }}
+                value={data.precio}
+                onChange={handleChange}
+              />
+            </div>
             <div className="flex flex-col mr-72">
               <label
                 htmlFor="descripcion"
@@ -176,29 +178,14 @@ const Page = () => {
                 Descripción
               </label>
               <input
-                id="descripcion"
                 type="text"
-                className="w-96 h-20 rounded-lg border-none"
+                name="descripcion"
+                className="w-96 h-20 rounded-lg border-none px-6"
                 style={{ backgroundColor: "#dfdfdf" }}
-                value={formData.descripcion}
+                value={data.descripcion}
                 onChange={handleChange}
               />
             </div>
-          </div>
-          <div className="flex flex-col">
-            <label
-              htmlFor="imagen"
-              className="uppercase text-white font-extrabold"
-            >
-              Imagen
-            </label>
-            <input
-              id="imagen"
-              type="file"
-              className="w-80 h-8 rounded-lg border-none"
-              style={{ backgroundColor: "#dfdfdf" }}
-              onChange={handleImageChange}
-            />
           </div>
 
           <button

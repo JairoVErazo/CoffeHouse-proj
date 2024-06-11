@@ -101,6 +101,7 @@ namespace CoffeHouse.Server.Servicios
                 Disponible = producto.Disponible,
                 Imagen = rutaImagen,
                 Descripcion = producto.Descripcion,
+                Precio = producto.Precio
             };
 
             await _context.AddAsync(nuevoProduct);

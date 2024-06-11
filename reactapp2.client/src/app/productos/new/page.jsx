@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Page = () => {
@@ -10,10 +10,29 @@ const Page = () => {
     disponible: false,
     descripcion: "",
     imagen: null,
+    precio: 0,
   });
 
+  const [categorias, setCategorias] = useState([]);
+
+  useEffect(() => {
+    const fetchCategorias = async () => {
+      try {
+        const response = await axios.get("/api/Categorias");
+        setCategorias(response.data);
+      } catch (error) {
+        console.error("Error al obtener las categorías:", error);
+      }
+    };
+
+    fetchCategorias();
+  }, []);
+
+  console.log(categorias);
+
   const handleChange = (e) => {
-    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
     setFormData({
       ...formData,
       [e.target.id]: value,
@@ -23,7 +42,7 @@ const Page = () => {
   const handleImageChange = (e) => {
     setFormData({
       ...formData,
-      imagen: e.target.files[0]
+      imagen: e.target.files[0],
     });
   };
 
@@ -43,6 +62,9 @@ const Page = () => {
     dataToSend.append("disponible", formData.disponible);
     dataToSend.append("deTemporada", formData.deTemporada);
     dataToSend.append("imagen", formData.imagen);
+    dataToSend.append("precio", formData.precio);
+
+    console.log("data nueva", formData);
 
     try {
       const response = await axios.post("/api/Productos", dataToSend, {
@@ -76,14 +98,24 @@ const Page = () => {
               >
                 IdCategoria
               </label>
-              <input
+              <select
                 id="idCategoria"
-                type="number"
                 className="w-80 h-8 rounded-lg border-none"
                 style={{ backgroundColor: "#dfdfdf" }}
                 onChange={handleChange}
-              />
+              >
+                <option value="">Seleccione una categoría</option>
+                {categorias.map((categoria) => (
+                  <option
+                    key={categoria.idCategoria}
+                    value={categoria.idCategoria}
+                  >
+                    {categoria.nombreCategoria}
+                  </option>
+                ))}
+              </select>
             </div>
+
             <div className="flex flex-col">
               <label
                 htmlFor="nombreProducto"
@@ -154,6 +186,26 @@ const Page = () => {
                 onChange={handleChange}
               />
             </div>
+          </div>
+          <div className="flex flex-col">
+            <label
+              htmlFor="precio"
+              className="uppercase text-white font-extrabold"
+            >
+              Precio
+            </label>
+            <input
+              id="precio"
+              type="number"
+              className="w-80 h-8 rounded-lg border-none"
+              style={{ backgroundColor: "#dfdfdf" }}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  precio: parseFloat(e.target.value),
+                })
+              }
+            />
           </div>
           <div className="flex flex-col">
             <label

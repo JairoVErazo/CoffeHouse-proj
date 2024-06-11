@@ -28,6 +28,7 @@ const Page = () => {
       console.error("Error al registrar usuario:", error);
     }
   };
+
   return (
     <div className="flex justify-center items-center">
       <div style={{ backgroundColor: "#bb8b90" }} className="rounded-lg ">
@@ -44,30 +45,32 @@ const Page = () => {
             <div>
               <div className="flex flex-col ">
                 <label
-                  htmlFor=""
-                  className="uppercase  text-white font-extrabold"
+                  htmlFor="nombre"
+                  className="uppercase text-white font-extrabold"
                 >
                   Nombre
                 </label>
                 <input
+                  id="nombre"
                   type="text"
                   onChange={(e) => setNombre(e.target.value)}
-                  className="w-80  rounded-lg border-none"
+                  className="w-80 rounded-lg border-none"
                   style={{ backgroundColor: "#dfdfdf" }}
                 />
               </div>
             </div>
             <div className="flex flex-col ">
               <label
-                htmlFor=""
-                className="uppercase  text-white font-extrabold"
+                htmlFor="apellido"
+                className="uppercase text-white font-extrabold"
               >
                 Apellido
               </label>
               <input
+                id="apellido"
                 type="text"
                 onChange={(e) => setApellido(e.target.value)}
-                className="w-80  rounded-lg border-none"
+                className="w-80 rounded-lg border-none"
                 style={{ backgroundColor: "#dfdfdf" }}
               />
             </div>
@@ -77,30 +80,32 @@ const Page = () => {
             <div>
               <div className="flex flex-col ">
                 <label
-                  htmlFor=""
-                  className="uppercase  text-white font-extrabold"
+                  htmlFor="nombreUsuario"
+                  className="uppercase text-white font-extrabold"
                 >
                   Nombre de usuario
                 </label>
                 <input
+                  id="nombreUsuario"
                   type="text"
                   onChange={(e) => setNombreUsuario(e.target.value)}
-                  className="w-80  rounded-lg border-none"
+                  className="w-80 rounded-lg border-none"
                   style={{ backgroundColor: "#dfdfdf" }}
                 />
               </div>
             </div>
             <div className="flex flex-col ">
               <label
-                htmlFor=""
-                className="uppercase  text-white font-extrabold"
+                htmlFor="contraseña"
+                className="uppercase text-white font-extrabold"
               >
                 Contraseña
               </label>
               <input
+                id="contraseña"
                 type="password"
                 onChange={(e) => setContraseña(e.target.value)}
-                className="w-80  rounded-lg border-none"
+                className="w-80 rounded-lg border-none"
                 style={{ backgroundColor: "#dfdfdf" }}
               />
             </div>
@@ -110,12 +115,13 @@ const Page = () => {
             <div>
               <div className="flex flex-col ">
                 <label
-                  htmlFor=""
-                  className="uppercase  text-white font-extrabold"
+                  htmlFor="estado"
+                  className="uppercase text-white font-extrabold"
                 >
                   Estado
                 </label>
                 <select
+                  id="estado"
                   value={estado ? "activo" : "inactivo"}
                   onChange={(e) =>
                     setEstado(e.target.value === "activo" ? true : false)
@@ -128,19 +134,24 @@ const Page = () => {
                 </select>
               </div>
             </div>
-            <div className="flex flex-col ">
+            <div className="flex flex-col">
               <label
-                htmlFor=""
-                className="uppercase  text-white font-extrabold"
+                htmlFor="rol"
+                className="uppercase text-white font-extrabold"
               >
                 Rol
               </label>
-              <input
-                type="number"
-                className="w-80  rounded-lg border-none"
+              <select
+                id="rol"
+                className="w-80 rounded-lg border-none"
                 onChange={(e) => setIdRol(e.target.value)}
                 style={{ backgroundColor: "#dfdfdf" }}
-              />
+              >
+                <option value="">Selecciona un rol</option>
+                <option value="1">Administrador</option>
+                <option value="2">Cajero</option>
+                <option value="3">Cocinero</option>
+              </select>
             </div>
           </div>
 
