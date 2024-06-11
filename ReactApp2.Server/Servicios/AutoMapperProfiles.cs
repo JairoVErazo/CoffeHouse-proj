@@ -12,7 +12,8 @@ namespace CoffeHouse.Server.Servicios
             .ForMember(dest => dest.Recetas, opt => opt
             .MapFrom(src => src.Receta
             .Select(r => new RecetaDTO
-            {   Nombre = r.Nombre,
+            {   Id=r.IdReceta,
+                Nombre = r.Nombre,
                 CostoTotal = r.CostoTotal,
                 Descripcion = r.Descripcion,
                 Porciones = r.Porciones
