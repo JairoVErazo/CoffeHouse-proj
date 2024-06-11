@@ -24,17 +24,19 @@ namespace CoffeHouse.Server.Controllers
             _mapper = mapper;
         }
 
-      
+        [HttpGet]
+        public async Task<IActionResult> ListarRecetas()
+        {
+            var recetas = await _repositorioReceta.ObtenerRecetas();
+            return Ok(recetas);
+        }
 
         [HttpPost]
         public async Task<IActionResult> CrearReceta(CrearRecetaRequest request)
         {
-
             var nuevaReceta = await _repositorioReceta.CrearReceta(request);
-
             return Ok(nuevaReceta);
         }
-
 
     }
 }
