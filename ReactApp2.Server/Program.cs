@@ -26,6 +26,7 @@ builder.Services.AddScoped<IAutorizacionService, AutorizacionService>();
 builder.Services.AddTransient<IRepositorioProductos, RepositorioProductos>();
 builder.Services.AddTransient<IRepositorioIngredientes, RepositorioIngredientes>();
 builder.Services.AddTransient<IRepositorioCategorias, RepositorioCategorias>();
+builder.Services.AddTransient<IRepositorioOrden, RepositorioOrden>();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddAuthentication(config =>
 {

@@ -86,6 +86,7 @@ namespace COFFEHOUSE.Server.Servicios
 
             var response = new AutorizacionResponse()
             {
+                Id=usaurio.IdUsuario,
                 Token = tokenCreado,
                 Resultado = true,
                 Mensaje = "Ok"

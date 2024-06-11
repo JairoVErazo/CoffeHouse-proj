@@ -8,12 +8,14 @@ const LoginPage = () => {
   const [nombreUsuario, setNombreUsuario] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [datos, setDatos] = useState({});
 
   const login = async (credentials) => {
     try {
       const response = await axios.post("/api/Usuario/Login", credentials);
       if (response.status === 200) {
         localStorage.setItem("token", response.data.token);
+        console.log(response.data);
         router.push("/home");
       } else {
         setError("Credenciales inválidas");
