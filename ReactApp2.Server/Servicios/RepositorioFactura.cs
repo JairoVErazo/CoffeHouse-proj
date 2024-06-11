@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CoffeHouse.Server.Models;
+using CoffeHouse.Server.Models.Custom;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace CoffeHouse.Server.Servicios
 {
     public interface IRepositorioFactura
     {
-        Task<Factura> CrearFactura(Factura factura);
+        Task<Factura> CrearFactura(facturaRequest factura);
         Task<IEnumerable<Factura>> ObtenerFactura();
     }
 
@@ -29,7 +30,7 @@ namespace CoffeHouse.Server.Servicios
             return factura;
         }
 
-        public async Task<Factura> CrearFactura(Factura factura)
+        public async Task<Factura> CrearFactura(facturaRequest factura)
         {
             DateOnly hoy = DateOnly.FromDateTime(DateTime.Now);
             var nuevaFactura = new Factura()

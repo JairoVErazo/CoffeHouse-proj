@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CoffeHouse.Server.Models;
+using CoffeHouse.Server.Models.Custom;
 using CoffeHouse.Server.Servicios;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -27,12 +28,9 @@ namespace CoffeHouse.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CrearFactura([FromBody] Factura request)
+        public async Task<IActionResult> CrearFactura([FromBody] facturaRequest request)
         {
-            if (request == null)
-            {
-                return BadRequest(new { error = "Request is null" });
-            }
+            
 
             var factura = await _repositorioFactura.CrearFactura(request);
             return Ok(factura);

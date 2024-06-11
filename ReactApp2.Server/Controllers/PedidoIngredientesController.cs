@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CoffeHouse.Server.Models;
+using CoffeHouse.Server.Models.Custom;
 using CoffeHouse.Server.Servicios;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace CoffeHouse.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CrearPedidoIngredientes([FromBody] PedidoIngrediente request)
+        public async Task<IActionResult> CrearPedidoIngredientes([FromBody] PedidoIngredienteRequest request)
         {
 
             var pedidoingredientes = await _repositorioPedidoIngredientes.CrearPedidoIngredientes(request);

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CoffeHouse.Server.Models;
+using CoffeHouse.Server.Models.Custom;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace CoffeHouse.Server.Servicios
 {
     public interface IRepositorioPedidoIngredientes
     {
-        Task<PedidoIngrediente> CrearPedidoIngredientes(PedidoIngrediente pedidoingredientes);
+        Task<PedidoIngrediente> CrearPedidoIngredientes(PedidoIngredienteRequest pedidoingredientes);
         Task<IEnumerable<PedidoIngrediente>> ObtenerPedidoIngredientes();
     }
 
@@ -29,7 +30,7 @@ namespace CoffeHouse.Server.Servicios
             return pedidoingredientes;
         }
 
-        public async Task<PedidoIngrediente> CrearPedidoIngredientes(PedidoIngrediente pedidoingredientes)
+        public async Task<PedidoIngrediente> CrearPedidoIngredientes(PedidoIngredienteRequest pedidoingredientes)
         {
             DateOnly hoy = DateOnly.FromDateTime(DateTime.Now);
             var nuevoPedidoIngredientes = new PedidoIngrediente()

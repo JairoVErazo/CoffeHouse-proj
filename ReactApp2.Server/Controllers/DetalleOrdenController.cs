@@ -28,7 +28,7 @@ namespace CoffeHouse.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CrearDetalleOrden( DetalleOrden request)
+        public async Task<IActionResult> CrearDetalleOrden( DetalleOrdenRequest request)
         {
           
             var detalleOrden = await _repositorioDetalleOrden.CrearDetalleOrden(request);

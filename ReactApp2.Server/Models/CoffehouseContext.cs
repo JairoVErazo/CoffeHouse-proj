@@ -59,22 +59,28 @@ public partial class CoffehouseContext : DbContext
 
         modelBuilder.Entity<DetalleOrden>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("DetalleOrden", tb => tb.HasTrigger("ActualizarInventario"));
+            // Definir la clave primaria compuesta
+            entity.HasKey(d => new { d.IdReceta, d.IdOrden });
 
+            // Configuración de la propiedad PrecioTotal
             entity.Property(e => e.PrecioTotal).HasColumnType("money");
 
-            entity.HasOne(d => d.IdOrdenNavigation).WithMany()
+            // Configuración de la relación con la tabla Orden
+            entity.HasOne(d => d.IdOrdenNavigation)
+                .WithMany()
                 .HasForeignKey(d => d.IdOrden)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_DetalleOrden_Orden");
 
-            entity.HasOne(d => d.IdRecetaNavigation).WithMany()
+            // Configuración de la relación con la tabla Recetas
+            entity.HasOne(d => d.IdRecetaNavigation)
+                .WithMany()
                 .HasForeignKey(d => d.IdReceta)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_DetalleOrden_Recetas");
         });
+
+
 
         modelBuilder.Entity<DetalleRecetum>(entity =>
         {

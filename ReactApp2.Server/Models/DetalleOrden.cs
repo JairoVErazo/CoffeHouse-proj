@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CoffeHouse.Server.Models;
 
 public partial class DetalleOrden
 {
+    
     public int IdReceta { get; set; }
 
     public int IdOrden { get; set; }
