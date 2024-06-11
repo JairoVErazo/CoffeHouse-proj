@@ -1,4 +1,5 @@
 ﻿using CoffeHouse.Server.Models;
+using CoffeHouse.Server.Models.Custom;
 using CoffeHouse.Server.Servicios;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +32,13 @@ namespace CoffeHouse.Server.Controllers
         {
             var ingrediente = await _repositorioIngredientes.CrearIngrediente(request);
 
+            return Ok(ingrediente);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> EditarIngrediente(int id, IngredienteRequest request)
+        {
+            var ingrediente = await _repositorioIngredientes.EditarIngrediente(id, request);
             return Ok(ingrediente);
         }
     }
