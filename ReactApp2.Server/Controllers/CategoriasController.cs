@@ -1,27 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using CoffeHouse.Server.Models;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using CoffeHouse.Server.Servicios;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeHouse.Server.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class CategoriasController : ControllerBase
     {
-        private readonly CoffehouseContext _context;
+        private readonly IRepositorioCategorias _repositorioCategorias;
 
-        public CategoriasController(CoffehouseContext context)
+        public CategoriasController( IRepositorioCategorias repositorioCategorias)
         {
-            _context = context;
+            _repositorioCategorias = repositorioCategorias;
         }
 
-        // GET: api/Categorias
         [HttpGet]
-        public async Task<IActionResult> GetCategorias()
+        public async Task<IActionResult> ObtenerCategorias()
         {
-            var categorias = await _context.CategoriaProductos.ToListAsync();
-            return Ok(categorias); // Retornar datos como JSON
+            var categorias = await _repositorioCategorias.ListarCategorias();
+
+            return Ok(categorias);
         }
     }
 }
