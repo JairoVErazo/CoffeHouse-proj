@@ -3,13 +3,19 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Page = ({ params }) => {
+  const initialFormData = {
+    nombre: "",
+    caducidad: "",
+    precioUnitario: 0,
+    existencias: 0,
+    unidadMedida: "G",
+  };
   return (
     <div className="flex justify-center items-center">
       <div style={{ backgroundColor: "#bb8b90" }} className="rounded-lg ">
         <div className="py-9 px-44 ">
-          <h2 className="text-white font-bold text-center text-5xl">Editar</h2>
           <h2 className="text-white font-bold text-center text-5xl">
-            Nombre del producto
+            Crear una receta
           </h2>
         </div>
         <form className="mt-5 flex flex-col items-center mb-10">
@@ -17,30 +23,29 @@ const Page = ({ params }) => {
             <div>
               <div className="flex flex-col ">
                 <label
-                  htmlFor="idCategoria"
+                  htmlFor="nombre"
                   className="uppercase text-white font-extrabold"
                 >
-                  IdCategoria
+                  Nombre de la receta
                 </label>
                 <input
                   type="text"
-                  name="idCategoria"
+                  name="nombre"
                   className="w-80 h-8 rounded-lg border-none px-6"
                   style={{ backgroundColor: "#dfdfdf" }}
-                  disabled
                 />
               </div>
             </div>
             <div className="flex flex-col ">
               <label
-                htmlFor="nombreProducto"
+                htmlFor="porciones"
                 className="uppercase text-white font-extrabold"
               >
-                Nombre
+                Porciones
               </label>
               <input
-                type="text"
-                name="nombreProducto"
+                type="number"
+                name="porciones"
                 className="w-80 h-8 rounded-lg border-none px-6"
                 style={{ backgroundColor: "#dfdfdf" }}
               />
@@ -48,77 +53,44 @@ const Page = ({ params }) => {
           </div>
 
           <div className="flex space-x-10 mt-10">
-            <div>
-              <div className="flex flex-col ">
-                <label
-                  htmlFor="deTemporada"
-                  className="uppercase text-white font-extrabold"
-                >
-                  Temporada
-                </label>
-                <select
-                  name="deTemporada"
-                  className="w-80 h-8 rounded-lg border-none px-6"
-                  style={{ backgroundColor: "#dfdfdf" }}
-                >
-                  <option value="true">Sí</option>
-                  <option value="false">No</option>
-                </select>
-              </div>
-            </div>
             <div className="flex flex-col ">
               <label
-                htmlFor="disponible"
+                htmlFor="idProducto"
                 className="uppercase text-white font-extrabold"
               >
-                Disponible
-              </label>
-              <select
-                name="disponible"
-                className="w-80 h-8 rounded-lg border-none px-6"
-                style={{ backgroundColor: "#dfdfdf" }}
-              >
-                <option value="true">Sí</option>
-                <option value="false">No</option>
-              </select>
-            </div>
-          </div>
-          <div className="flex space-x-10 mt-10">
-            <div className="flex flex-col ">
-              <label
-                htmlFor="precio"
-                className="uppercase text-white font-extrabold"
-              >
-                Precio
+                Id producto
               </label>
               <input
                 type="number"
-                name="precio"
+                name="idProducto"
                 className="w-80 h-8 rounded-lg border-none px-6"
-                style={{ backgroundColor: "#dfdfdf" }}
+                style={{ backgroundColor: "white" }}
+                value={params.id}
+                disabled
               />
-            </div>
-            <div className="flex flex-col mr-72">
-              <label
-                htmlFor="descripcion"
-                className="uppercase text-white font-extrabold"
-              >
-                Descripción
-              </label>
-              <input
-                type="text"
-                name="descripcion"
-                className="w-96 h-20 rounded-lg border-none px-6"
-                style={{ backgroundColor: "#dfdfdf" }}
-              />
+              <div className="flex flex-col mr-72 mt-6">
+                <label
+                  htmlFor="descripcion"
+                  className="uppercase text-white font-extrabold"
+                >
+                  Descripción producto
+                </label>
+                <input
+                  type="text"
+                  name="descripcion"
+                  className="w-96 h-20 rounded-lg border-none px-6"
+                  style={{ backgroundColor: "#dfdfdf" }}
+                />
+              </div>
             </div>
           </div>
+          <div className="flex space-x-10 mt-10"></div>
 
           <button
             type="submit"
             className="px-14 text-white font-bold rounded-lg mt-10 py-2 botones"
           >
-            Actualizar
+            Crear
           </button>
         </form>
       </div>
