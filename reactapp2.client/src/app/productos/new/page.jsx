@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Page = () => {
@@ -10,7 +10,25 @@ const Page = () => {
     disponible: false,
     descripcion: "",
     imagen: null,
+    precio: 0,
   });
+
+  const [categorias, setCategorias] = useState([]);
+
+  useEffect(() => {
+    const fetchCategorias = async () => {
+      try {
+        const response = await axios.get("/api/Categorias");
+        setCategorias(response.data);
+      } catch (error) {
+        console.error("Error al obtener las categorías:", error);
+      }
+    };
+
+    fetchCategorias();
+  }, []);
+
+  console.log(categorias);
 
   const handleChange = (e) => {
     const value =
@@ -44,6 +62,9 @@ const Page = () => {
     dataToSend.append("disponible", formData.disponible);
     dataToSend.append("deTemporada", formData.deTemporada);
     dataToSend.append("imagen", formData.imagen);
+    dataToSend.append("precio", formData.precio);
+
+    console.log("data nueva", formData);
 
     try {
       const response = await axios.post("/api/Productos", dataToSend, {
@@ -83,10 +104,15 @@ const Page = () => {
                 style={{ backgroundColor: "#dfdfdf" }}
                 onChange={handleChange}
               >
-                <option value="">categoría</option>
-                <option value="1">Categoría 1</option>
-                <option value="2">Categoría 2</option>
-                <option value="3">Categoría 3</option>
+                <option value="">Seleccione una categoría</option>
+                {categorias.map((categoria) => (
+                  <option
+                    key={categoria.idCategoria}
+                    value={categoria.idCategoria}
+                  >
+                    {categoria.nombreCategoria}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -160,6 +186,26 @@ const Page = () => {
                 onChange={handleChange}
               />
             </div>
+          </div>
+          <div className="flex flex-col">
+            <label
+              htmlFor="precio"
+              className="uppercase text-white font-extrabold"
+            >
+              Precio
+            </label>
+            <input
+              id="precio"
+              type="number"
+              className="w-80 h-8 rounded-lg border-none"
+              style={{ backgroundColor: "#dfdfdf" }}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  precio: parseFloat(e.target.value),
+                })
+              }
+            />
           </div>
           <div className="flex flex-col">
             <label
