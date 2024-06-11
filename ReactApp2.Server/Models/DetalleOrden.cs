@@ -13,7 +13,7 @@ public partial class DetalleOrden
 
     public decimal PrecioTotal { get; set; }
 
-    public virtual Orden IdOrdenNavigation { get; set; } = null!;
+    public virtual Orden? IdOrdenNavigation { get; set; } 
 
-    public virtual Receta IdRecetaNavigation { get; set; } = null!;
+    public virtual Receta? IdRecetaNavigation { get; set; } 
 }

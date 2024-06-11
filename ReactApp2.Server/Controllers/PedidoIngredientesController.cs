@@ -29,10 +29,6 @@ namespace CoffeHouse.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> CrearPedidoIngredientes([FromBody] PedidoIngrediente request)
         {
-            if (request == null)
-            {
-                return BadRequest(new { error = "Request is null" });
-            }
 
             var pedidoingredientes = await _repositorioPedidoIngredientes.CrearPedidoIngredientes(request);
             return Ok(pedidoingredientes);

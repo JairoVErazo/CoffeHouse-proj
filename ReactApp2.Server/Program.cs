@@ -29,6 +29,7 @@ builder.Services.AddTransient<IRepositorioCategorias, RepositorioCategorias>();
 builder.Services.AddTransient<IRepositorioOrden, RepositorioOrden>();
 builder.Services.AddTransient<IRepositorioPedidoIngredientes, RepositorioPedidoIngredientes>();
 builder.Services.AddTransient<IRepositorioFactura, RepositorioFactura>();
+builder.Services.AddTransient<IRepositorioDetalleOrden, RepositorioDetalleOrden>();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddAuthentication(config =>
 {
