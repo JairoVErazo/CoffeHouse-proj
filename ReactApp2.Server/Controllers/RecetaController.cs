@@ -20,6 +20,12 @@ namespace CoffeHouse.Server.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> DispararTrigger()
+        {
+           await _repositorioReceta.DispararTrigger();
+            return Ok(0);
+        }
         
 
 
