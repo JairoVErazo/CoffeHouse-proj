@@ -85,21 +85,17 @@ namespace CoffeHouse.Server.Controllers
             var nuevaOrden = await _repositorioOrden.CrearOrden(request);
             return Ok(nuevaOrden);
         }
-
         [HttpPut("{id}")]
         public async Task<IActionResult> ActualizarOrden(int id, [FromBody] ActualizarOrdenRequest request)
         {
-            if (!TimeOnly.TryParse(request.HoraDespacho, out var horaDespacho))
-            {
-                return BadRequest(new { error = "Formato de hora de despacho no válido. Utilice HH:mm:ss" });
-            }
+            TimeOnly horaDespacho = TimeOnly.FromDateTime(DateTime.Now);
 
-            var resultado = await _repositorioOrden.ActualizarOrden(id, request.NuevoEstado, horaDespacho, request.PrecioFinal);
+            var resultado = await _repositorioOrden.ActualizarOrden(id, request.NuevoEstado, horaDespacho);
             if (!resultado)
             {
                 return NotFound(new { error = $"La orden con el id {id} no fue encontrada" });
             }
-            return Ok(new { mensaje = "Orden actualizada correctamente" });
+            return Ok(new { mensaje = "Orden actualizada correctamente", horaDespacho });
         }
     }
 }

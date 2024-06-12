@@ -2,8 +2,7 @@
 {
     public class ActualizarOrdenRequest
     {
-        public int NuevoEstado { get; set; }
-        public string HoraDespacho { get; set; }
-        public decimal PrecioFinal { get; set; }
+        public int NuevoEstado { get; set; }       
+      
     }
 }
