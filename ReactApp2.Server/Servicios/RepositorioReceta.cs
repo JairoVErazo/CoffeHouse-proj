@@ -3,13 +3,14 @@ using CoffeHouse.Server.Models;
 using AutoMapper;
 using CoffeHouse.Server.Dto_s;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 
 namespace CoffeHouse.Server.Servicios
 {
     public interface IRepositorioReceta
     {
         Task<IEnumerable<RecetaDTO>> ObtenerRecetasDTO();
-        Task<Receta> CrearReceta(CrearRecetaRequest receta);
+        Task<Receta> CrearReceta(Recetarequest receta);
         Task<IEnumerable<Receta>> ObtenerRecetas();
     }
     public class RepositorioReceta : IRepositorioReceta
@@ -24,21 +25,43 @@ namespace CoffeHouse.Server.Servicios
             _mapper = mapper;
         }
 
-        public async Task<Receta> CrearReceta(CrearRecetaRequest receta)
+        public async Task<Receta> CrearReceta(Recetarequest receta)
         {
-            var nuevaReceta = new Receta()
+            using (var transaction = await _context.Database.BeginTransactionAsync())
             {
-                Nombre = receta.Nombre,
-                Descripcion = receta.Descripcion,
-                Porciones = receta.Porciones,
-                CostoTotal = receta.CostoTotal,
-                IdProducto = receta.IdProducto
-            };
+                try
+                {
+                    // Ejecutar el procedimiento almacenado para insertar la receta
+                    await _context.Database.ExecuteSqlRawAsync(
+                        "EXEC InsertReceta @Nombre, @Descripcion, @Porciones, @IdProducto",
+                        new SqlParameter("@Nombre", receta.Nombre),
+                        new SqlParameter("@Descripcion", receta.Descripcion),
+                        new SqlParameter("@Porciones", receta.Porciones),
+                        new SqlParameter("@IdProducto", receta.IdProducto));
 
-            await _context.AddAsync(nuevaReceta);
-            await _context.SaveChangesAsync();
+                    // Obtener el ID de la nueva receta insertada
+                    var nuevaRecetaId = await _context.Recetas
+                        .Where(r => r.Nombre == receta.Nombre && r.IdProducto == receta.IdProducto)
+                        .OrderByDescending(r => r.IdReceta) // Ajusta esto al nombre correcto de la columna de clave primaria
+                        .Select(r => r.IdReceta) // Ajusta esto al nombre correcto de la columna de clave primaria
+                        .FirstOrDefaultAsync();
 
-            return nuevaReceta;
+                    var nuevaReceta = await _context.Recetas.FindAsync(nuevaRecetaId);
+
+                    await transaction.CommitAsync();
+                    return nuevaReceta;
+                }
+                catch (Exception)
+                {
+                    await transaction.RollbackAsync();
+                    throw;
+                }
+            }
+        }
+
+        public Task<Receta> CrearReceta(CrearRecetaRequest receta)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<IEnumerable<RecetaDTO>> ObtenerReceta()

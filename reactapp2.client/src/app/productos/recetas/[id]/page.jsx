@@ -1,15 +1,43 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 const Page = ({ params }) => {
   const initialFormData = {
     nombre: "",
-    caducidad: "",
-    precioUnitario: 0,
-    existencias: 0,
-    unidadMedida: "G",
+    descripcion: "",
+    porciones: 0,
+    costoTotal: 0,
+    idProducto: params.id,
   };
+
+  const [formData, setFormData] = useState(initialFormData);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("/api/Receta", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response.data);
+      setFormData(initialFormData); // Resetear el formulario
+      alert("Receta creada exitosamente"); // Mostrar mensaje de alerta
+    } catch (error) {
+      console.error("Error al enviar el formulario:", error);
+    }
+  };
+
   return (
     <div className="flex justify-center items-center">
       <div style={{ backgroundColor: "#bb8b90" }} className="rounded-lg ">
@@ -18,7 +46,7 @@ const Page = ({ params }) => {
             Crear una receta
           </h2>
         </div>
-        <form className="mt-5 flex flex-col items-center mb-10">
+        <form className="mt-5 flex flex-col items-center mb-10" onSubmit={handleSubmit}>
           <div className="flex space-x-10">
             <div>
               <div className="flex flex-col ">
@@ -33,6 +61,8 @@ const Page = ({ params }) => {
                   name="nombre"
                   className="w-80 h-8 rounded-lg border-none px-6"
                   style={{ backgroundColor: "#dfdfdf" }}
+                  onChange={handleChange}
+                  value={formData.nombre}
                 />
               </div>
             </div>
@@ -48,6 +78,8 @@ const Page = ({ params }) => {
                 name="porciones"
                 className="w-80 h-8 rounded-lg border-none px-6"
                 style={{ backgroundColor: "#dfdfdf" }}
+                onChange={handleChange}
+                value={formData.porciones}
               />
             </div>
           </div>
@@ -65,7 +97,7 @@ const Page = ({ params }) => {
                 name="idProducto"
                 className="w-80 h-8 rounded-lg border-none px-6"
                 style={{ backgroundColor: "white" }}
-                value={params.id}
+                value={formData.idProducto}
                 disabled
               />
               <div className="flex flex-col mr-72 mt-6">
@@ -73,18 +105,19 @@ const Page = ({ params }) => {
                   htmlFor="descripcion"
                   className="uppercase text-white font-extrabold"
                 >
-                  Descripción producto
+                  Descripción de la receta
                 </label>
                 <input
                   type="text"
                   name="descripcion"
                   className="w-96 h-20 rounded-lg border-none px-6"
                   style={{ backgroundColor: "#dfdfdf" }}
+                  onChange={handleChange}
+                  value={formData.descripcion}
                 />
               </div>
             </div>
           </div>
-          <div className="flex space-x-10 mt-10"></div>
 
           <button
             type="submit"
