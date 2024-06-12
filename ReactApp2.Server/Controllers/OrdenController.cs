@@ -30,38 +30,42 @@ namespace CoffeHouse.Server.Controllers
         {
             var ordenesConDetalle = await _context.Orden
                 .Where(o => o.IdEstado == 2)
-                .GroupJoin(
-                    _context.DetalleOrden,
-                    o => o.IdOrden,
-                    d => d.IdOrden,
-                    (o, detalles) => new { o, detalles }
-                )
-                .SelectMany(
-                    od => od.detalles.DefaultIfEmpty(),
-                    (od, detalle) => new
-                    {
-                        od.o.IdOrden,
-                        od.o.NombreCliente,
-                        od.o.Comentarios,
-                        od.o.IdUsuario,
-                        od.o.IdEstado,
-                        od.o.HoraRecibida,
-                        od.o.HoraDespacho,
-                        od.o.Fecha,
-                        od.o.PrecioFinal,
-                        DetalleOrden = detalle != null ? new
+                .Select(o => new
+                {
+                    o.IdOrden,
+                    o.NombreCliente,
+                    o.Comentarios,
+                    o.IdUsuario,
+                    o.IdEstado,
+                    o.HoraRecibida,
+                    o.HoraDespacho,
+                    o.Fecha,
+                    o.PrecioFinal,
+                    DetallesOrden = _context.DetalleOrden
+                        .Where(d => d.IdOrden == o.IdOrden)
+                        .Select(d => new
                         {
-                            detalle.IdReceta,
-                            detalle.CantidadProductos,
-                            detalle.PrecioTotal
-                        } : null
-                    }
-                )
+                            d.IdReceta,
+                            d.CantidadProductos,
+                            d.PrecioTotal,
+                            Receta = _context.Recetas
+                                .Where(r => r.IdReceta == d.IdReceta)
+                                .Select(r => new
+                                {
+                                    r.IdReceta,
+                                    r.Nombre,
+                                    r.Descripcion,
+                                    r.Porciones,
+                                    
+                                    // Añadir más campos según sea necesario
+                                })
+                                .FirstOrDefault()
+                        }).ToList()
+                })
                 .ToListAsync();
 
             return Ok(ordenesConDetalle);
         }
-
 
 
         [HttpGet]
