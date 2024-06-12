@@ -1,8 +1,10 @@
 "use client";
 import { Montserrat } from "next/font/google";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import NavBarAdmin from "@/Components/NavBarAdmin";
+import useStore from "@/data/store";
+import NavBar from "@/components/NavBar";
 import "./globals.css";
 
 const monse = Montserrat({ subsets: ["latin"] });
@@ -10,6 +12,13 @@ const monse = Montserrat({ subsets: ["latin"] });
 export default function RootLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
+  const [rol, setRol] = useState(0);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setRol(localStorage.getItem("rol"));
+    }
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -27,7 +36,6 @@ export default function RootLayout({ children }) {
     );
   }
 
-  // Aquí va tu layout global
   return (
     <html lang="en">
       <body
@@ -38,7 +46,8 @@ export default function RootLayout({ children }) {
           minHeight: "100vh",
         }}
       >
-        <NavBarAdmin />
+        {rol == 1 ? <NavBarAdmin /> : <NavBar rol={rol} />}
+
         {children}
       </body>
     </html>

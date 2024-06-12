@@ -1,162 +1,67 @@
+"use client";
 import React from "react";
 import Cash from "@/Components/Cash";
 import Card from "@/components/Card";
 import Crypto from "@/components/Crypto";
+import useStore from "@/data/store";
+import { useState, useEffect } from "react";
 
 const Page = () => {
+  const idOrden = useStore((state) => state.idOrden);
+  const [precio, setPrecio] = useState(0);
+
+  useEffect(() => {
+    setPrecio(localStorage.getItem("precio"));
+  }, []);
+  console.log(precio);
   return (
     <div className="flex justify-center" style={{ color: "#94303c" }}>
-      <div className="w-auto flex">
-        <div className="col-md-6 py-2">
-          <h2
-            className="text-center"
-            style={{ fontSize: "45px", fontWeight: "bold", marginLeft: "40px" }}
+      <div
+        className="col-md-6 py-10 rounded-md  font-bold"
+        style={{ backgroundColor: "#f7f6f6", height: "500px" }}
+      >
+        <div className="flex justify-center">
+          <h1
+            className="text-center text-6xl mb-12"
+            style={{ color: "#94303c" }}
           >
-            <div className="text-center">
-              <h1>Pagar Pedido</h1>
-            </div>
-          </h2>
-          <div className="flex justify-self-start">
-            <div
-              className="card rounded-xl"
-              style={{
-                marginBottom: "20px",
-                backgroundColor: "#ffffff, 0.7",
-                padding: "50px",
-              }}
-            >
-              <div className="card-body">
-                <div className="details space-y-11">
-                  <div
-                    style={{
-                      padding: "30px",
-                      backgroundColor: "#ffffff",
-                      borderRadius: "100px",
-                    }}
-                  >
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <img
-                        src={"/img/cheesecake.jpg"}
-                        style={{
-                          width: "150px",
-                          height: "150px",
-                          border: "5px solid #94303c",
-                          marginLeft: "40px",
-                        }}
-                        alt="cake"
-                      />
-                      <div
-                        style={{
-                          textAlign: "center",
-                          fontSize: "25px",
-                          fontWeight: "bold",
-                          marginLeft: "40px",
-                        }}
-                      >
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <p style={{ marginRight: "20px" }}>Raspberry Cake</p>
-                          <p
-                            style={{
-                              marginRight: "30px",
-                              padding: "3px",
-                              border: "2px solid #94303c",
-                            }}
-                          >
-                            2
-                          </p>
-                          <p style={{ marginRight: "30px" }}> $9.98</p>
-
-                          <img
-                            src={"/img/Trash.svg"}
-                            style={{ width: "40px" }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex justify-center">
-                      <button
-                        type="button"
-                        className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 "
-                        style={{
-                          backgroundColor: "#94303c",
-                          marginLeft: "80px",
-                        }}
-                      >
-                        + Comentarios
-                      </button>
-                    </div>
-                  </div>
-
-                  <div
-                    style={{
-                      padding: "30px",
-                      backgroundColor: "#ffffff",
-                      borderRadius: "100px",
-                    }}
-                  >
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <img
-                        src={"/img/cheesecake.jpg"}
-                        style={{
-                          width: "150px",
-                          height: "150px",
-                          border: "5px solid #94303c",
-                          marginLeft: "40px",
-                        }}
-                        alt="cake"
-                      />
-                      <div
-                        style={{
-                          textAlign: "center",
-                          fontSize: "25px",
-                          fontWeight: "bold",
-                          marginLeft: "40px",
-                        }}
-                      >
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <p style={{ marginRight: "20px" }}>Raspberry Cake</p>
-                          <p
-                            style={{
-                              marginRight: "30px",
-                              padding: "3px",
-                              border: "2px solid #94303c",
-                            }}
-                          >
-                            2
-                          </p>
-                          <p style={{ marginRight: "30px" }}> $9.98</p>
-
-                          <img
-                            src={"/img/Trash.svg"}
-                            style={{ width: "40px" }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex justify-center">
-                      <button
-                        type="button"
-                        className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 "
-                        style={{
-                          backgroundColor: "#94303c",
-                          marginLeft: "80px",
-                        }}
-                      >
-                        + Comentarios
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            Orden # {""} {idOrden}
+          </h1>
+        </div>
+        <form>
+          <div
+            className="flex justify-between border-4 rounded-md mb-8 mx-16"
+            style={{ borderColor: "#94303c", color: "#94303c" }}
+          >
+            <h2 className="text-center  text-xl mx-12">Total</h2>
+            <div className="flex ">
+              <p>$</p>
+              <input
+                className="text-center text-xl  w-auto"
+                value={precio}
+                disabled
+              />
             </div>
           </div>
-          <div className="flex justify-center ">
-            <button type="button" className="text-white  font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2 "style={{backgroundColor:"#94303c"}}>Cash</button>
-            <button type="button" className="text-white  font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2 "style={{backgroundColor:"#94303c"}}>Card</button>
-            <button type="button" className="text-white  font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2 "style={{backgroundColor:"#94303c"}}>Crypto</button>
-            </div>
-        </div>
-        <Crypto/>
+          <select
+            className="w-80 h-8 rounded-lg border-none"
+            style={{ backgroundColor: "#dfdfdf" }}
+          >
+            <option value="0">--Seleccione un metodo de pago--</option>
+            <option value="1">Efectivo</option>
+            <option value="2">Tarjeta</option>
+            <option value="3">Crypto</option>
+          </select>
+          <div className="flex justify-center">
+            <button
+              type="button"
+              className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+              style={{ backgroundColor: "#94303c" }}
+            >
+              Imprimir Recibo
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

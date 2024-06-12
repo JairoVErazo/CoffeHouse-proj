@@ -189,6 +189,7 @@ const Page = () => {
           <div className="flex justify-center mt-4">
             <div className="text-black font-bold">Total a Pagar: ${total}</div>
           </div>
+          {localStorage.setItem("precio", total)}
 
           <div className="flex justify-center">
             <button

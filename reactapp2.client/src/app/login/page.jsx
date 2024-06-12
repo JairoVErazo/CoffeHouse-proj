@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import useStore from "@/data/store";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -18,7 +19,11 @@ const LoginPage = () => {
         localStorage.setItem("id_usuario", response.data.id);
         localStorage.setItem("rol", response.data.rol);
         console.log(response.data);
-        router.push("/home");
+        if (response.data.token) {
+          router.push("/home");
+        } else {
+          setError("Credenciales inválidas");
+        }
       } else {
         setError("Credenciales inválidas");
       }
@@ -71,7 +76,9 @@ const LoginPage = () => {
           <button
             type="submit"
             className="px-14 text-white font-bold rounded-lg mt-4 py-2"
-            style={{ backgroundColor: "#6a1b9a" }}
+            style={{
+              backgroundColor: "#94303c",
+            }}
           >
             Entrar
           </button>
