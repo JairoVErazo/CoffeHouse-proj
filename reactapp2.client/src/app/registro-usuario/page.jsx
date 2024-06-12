@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import axios from "axios";
-
+import swal from "sweetalert";
 const Page = () => {
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
@@ -23,7 +23,10 @@ const Page = () => {
         IdRol: idRol,
       });
 
-      console.log("Usuario registrado:", response.data);
+      swal({
+        icon: "success",
+        Text: "Usuario guardado correctamente",
+      });
     } catch (error) {
       console.error("Error al registrar usuario:", error);
     }
