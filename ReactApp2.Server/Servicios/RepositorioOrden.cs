@@ -12,6 +12,7 @@ namespace CoffeHouse.Server.Servicios
         Task<int> CrearOrden(CrearOrdenRequest request);
         Task<IEnumerable<Orden>> ObtenerOrden();
         Task<Orden> ObtenerOrdenbyId(int id);
+        Task<bool> ActualizarOrden(int id, int nuevoEstado, TimeOnly horaDespacho, decimal precioFinal);
     }
 
     public class RepositorioOrden : IRepositorioOrden
@@ -55,6 +56,19 @@ namespace CoffeHouse.Server.Servicios
             await _context.SaveChangesAsync();
 
             return orden.IdOrden;
+        }
+        public async Task<bool> ActualizarOrden(int id, int nuevoEstado, TimeOnly horaDespacho, decimal precioFinal)
+        {
+            var orden = await _context.Orden.FindAsync(id);
+            if (orden == null) return false;
+
+            orden.IdEstado = nuevoEstado;
+            orden.HoraDespacho = horaDespacho;
+            orden.PrecioFinal = precioFinal;
+            _context.Orden.Update(orden);
+            await _context.SaveChangesAsync();
+
+            return true;
         }
     }
 }
