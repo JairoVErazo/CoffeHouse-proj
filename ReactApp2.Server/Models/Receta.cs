@@ -17,5 +17,5 @@ public partial class Receta
 
     public int IdProducto { get; set; }
 
-    public virtual Producto? IdProductoNavigation { get; set; }
+    public virtual Producto IdProductoNavigation { get; set; } = null!;
 }

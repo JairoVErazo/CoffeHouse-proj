@@ -15,5 +15,5 @@ public partial class PedidoIngrediente
 
     public int IdIngrediente { get; set; }
 
-    public virtual Ingrediente? IdIngredienteNavigation { get; set; }
+    public virtual Ingrediente IdIngredienteNavigation { get; set; } = null!;
 }
