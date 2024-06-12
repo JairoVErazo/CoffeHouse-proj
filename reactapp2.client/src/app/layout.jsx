@@ -23,11 +23,10 @@ export default function RootLayout({ children }) {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token && pathname !== "/login") {
-      //router.push("/login");
+      router.push("/login");
     }
   }, [pathname, router]);
 
-  // Si la ruta es '/login', no aplicamos el layout
   if (pathname === "/login") {
     return (
       <html lang="en">

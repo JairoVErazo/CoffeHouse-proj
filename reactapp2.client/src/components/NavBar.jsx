@@ -1,4 +1,12 @@
+import { useRouter } from "next/navigation";
+
 const NavBar = ({ rol }) => {
+  const router = useRouter();
+  const logout = () => {
+    localStorage.removeItem("token");
+    router.push("/login");
+  };
+
   return (
     <nav style={{ backgroundColor: "transparent" }}>
       {rol == 2 ? (
@@ -11,7 +19,7 @@ const NavBar = ({ rol }) => {
             <ul className="font-bold flex flex-col p-4 md:p-0 mt-4 ounded-lg  md:flex-row md:space-x-8  md:mt-0">
               <li>
                 <a
-                  href="#"
+                  href="/home"
                   className="block py-2 px-3 text-rose-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-pink-950  text-xl "
                   aria-current="page"
                 >
@@ -20,20 +28,13 @@ const NavBar = ({ rol }) => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/menu"
                   className="block py-2 px-3 text-rose-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-pink-950  text-xl"
                 >
                   Menú
                 </a>
               </li>
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 px-3 text-rose-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-pink-950  text-xl"
-                >
-                  Pago
-                </a>
-              </li>
+
               <li>
                 <a
                   href="#"
@@ -70,7 +71,10 @@ const NavBar = ({ rol }) => {
                 </a>
               </li>
               <li>
-                <button className="block py-2 px-3 text-rose-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-pink-950  text-xl">
+                <button
+                  onClick={logout}
+                  className="block py-2 px-3 text-rose-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-pink-950  text-xl"
+                >
                   Log out
                 </button>
               </li>

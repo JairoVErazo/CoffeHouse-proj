@@ -2,6 +2,7 @@
 import { useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
+import ProtectedRoute from "../ProtectedRoute";
 const Page = () => {
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
@@ -33,140 +34,142 @@ const Page = () => {
   };
 
   return (
-    <div className="flex justify-center items-center">
-      <div style={{ backgroundColor: "#bb8b90" }} className="rounded-lg ">
-        <div className="py-9 px-44 ">
-          <h2 className="text-white font-extrabold text-center text-5xl">
-            Registrar Usuario
-          </h2>
-        </div>
-        <form
-          className="mt-5 flex flex-col  items-center mb-10"
-          onSubmit={handleSubmit}
-        >
-          <div className="flex space-x-10">
-            <div>
+    <ProtectedRoute>
+      <div className="flex justify-center items-center">
+        <div style={{ backgroundColor: "#bb8b90" }} className="rounded-lg ">
+          <div className="py-9 px-44 ">
+            <h2 className="text-white font-extrabold text-center text-5xl">
+              Registrar Usuario
+            </h2>
+          </div>
+          <form
+            className="mt-5 flex flex-col  items-center mb-10"
+            onSubmit={handleSubmit}
+          >
+            <div className="flex space-x-10">
+              <div>
+                <div className="flex flex-col ">
+                  <label
+                    htmlFor="nombre"
+                    className="uppercase text-white font-extrabold"
+                  >
+                    Nombre
+                  </label>
+                  <input
+                    id="nombre"
+                    type="text"
+                    onChange={(e) => setNombre(e.target.value)}
+                    className="w-80 rounded-lg border-none"
+                    style={{ backgroundColor: "#dfdfdf" }}
+                  />
+                </div>
+              </div>
               <div className="flex flex-col ">
                 <label
-                  htmlFor="nombre"
+                  htmlFor="apellido"
                   className="uppercase text-white font-extrabold"
                 >
-                  Nombre
+                  Apellido
                 </label>
                 <input
-                  id="nombre"
+                  id="apellido"
                   type="text"
-                  onChange={(e) => setNombre(e.target.value)}
+                  onChange={(e) => setApellido(e.target.value)}
                   className="w-80 rounded-lg border-none"
                   style={{ backgroundColor: "#dfdfdf" }}
                 />
               </div>
             </div>
-            <div className="flex flex-col ">
-              <label
-                htmlFor="apellido"
-                className="uppercase text-white font-extrabold"
-              >
-                Apellido
-              </label>
-              <input
-                id="apellido"
-                type="text"
-                onChange={(e) => setApellido(e.target.value)}
-                className="w-80 rounded-lg border-none"
-                style={{ backgroundColor: "#dfdfdf" }}
-              />
-            </div>
-          </div>
 
-          <div className="flex space-x-10 mt-10">
-            <div>
+            <div className="flex space-x-10 mt-10">
+              <div>
+                <div className="flex flex-col ">
+                  <label
+                    htmlFor="nombreUsuario"
+                    className="uppercase text-white font-extrabold"
+                  >
+                    Nombre de usuario
+                  </label>
+                  <input
+                    id="nombreUsuario"
+                    type="text"
+                    onChange={(e) => setNombreUsuario(e.target.value)}
+                    className="w-80 rounded-lg border-none"
+                    style={{ backgroundColor: "#dfdfdf" }}
+                  />
+                </div>
+              </div>
               <div className="flex flex-col ">
                 <label
-                  htmlFor="nombreUsuario"
+                  htmlFor="contraseña"
                   className="uppercase text-white font-extrabold"
                 >
-                  Nombre de usuario
+                  Contraseña
                 </label>
                 <input
-                  id="nombreUsuario"
-                  type="text"
-                  onChange={(e) => setNombreUsuario(e.target.value)}
+                  id="contraseña"
+                  type="password"
+                  onChange={(e) => setContraseña(e.target.value)}
                   className="w-80 rounded-lg border-none"
                   style={{ backgroundColor: "#dfdfdf" }}
                 />
               </div>
             </div>
-            <div className="flex flex-col ">
-              <label
-                htmlFor="contraseña"
-                className="uppercase text-white font-extrabold"
-              >
-                Contraseña
-              </label>
-              <input
-                id="contraseña"
-                type="password"
-                onChange={(e) => setContraseña(e.target.value)}
-                className="w-80 rounded-lg border-none"
-                style={{ backgroundColor: "#dfdfdf" }}
-              />
-            </div>
-          </div>
 
-          <div className="flex space-x-10 mt-10">
-            <div>
-              <div className="flex flex-col ">
+            <div className="flex space-x-10 mt-10">
+              <div>
+                <div className="flex flex-col ">
+                  <label
+                    htmlFor="estado"
+                    className="uppercase text-white font-extrabold"
+                  >
+                    Estado
+                  </label>
+                  <select
+                    id="estado"
+                    value={estado ? "activo" : "inactivo"}
+                    onChange={(e) =>
+                      setEstado(e.target.value === "activo" ? true : false)
+                    }
+                    className="w-80 rounded-lg border-none"
+                    style={{ backgroundColor: "#dfdfdf" }}
+                  >
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                  </select>
+                </div>
+              </div>
+              <div className="flex flex-col">
                 <label
-                  htmlFor="estado"
+                  htmlFor="rol"
                   className="uppercase text-white font-extrabold"
                 >
-                  Estado
+                  Rol
                 </label>
                 <select
-                  id="estado"
-                  value={estado ? "activo" : "inactivo"}
-                  onChange={(e) =>
-                    setEstado(e.target.value === "activo" ? true : false)
-                  }
+                  id="rol"
                   className="w-80 rounded-lg border-none"
+                  onChange={(e) => setIdRol(e.target.value)}
                   style={{ backgroundColor: "#dfdfdf" }}
                 >
-                  <option value="activo">Activo</option>
-                  <option value="inactivo">Inactivo</option>
+                  <option value="">Selecciona un rol</option>
+                  <option value="1">Administrador</option>
+                  <option value="2">Cajero</option>
+                  <option value="3">Cocinero</option>
                 </select>
               </div>
             </div>
-            <div className="flex flex-col">
-              <label
-                htmlFor="rol"
-                className="uppercase text-white font-extrabold"
-              >
-                Rol
-              </label>
-              <select
-                id="rol"
-                className="w-80 rounded-lg border-none"
-                onChange={(e) => setIdRol(e.target.value)}
-                style={{ backgroundColor: "#dfdfdf" }}
-              >
-                <option value="">Selecciona un rol</option>
-                <option value="1">Administrador</option>
-                <option value="2">Cajero</option>
-                <option value="3">Cocinero</option>
-              </select>
-            </div>
-          </div>
 
-          <button
-            type="submit"
-            className="px-14 text-white font-bold rounded-lg mt-10 py-2 botones"
-          >
-            Sign up
-          </button>
-        </form>
+            <button
+              type="submit"
+              className="px-14 text-white font-bold rounded-lg mt-10 py-2 botones"
+            >
+              Sign up
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
+    </ProtectedRoute>
   );
 };
 

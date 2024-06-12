@@ -1,6 +1,22 @@
 "use client";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import ProtectedRoute from "../ProtectedRoute";
+
 export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const timer = setTimeout(() => {
+        router.refresh(); // Recarga el navegador
+      }, 3000); // 3000 milisegundos = 3 segundos
+
+      // Cleanup del timeout
+      return () => clearTimeout(timer);
+    }
+  }, [router]);
+
   return (
     <ProtectedRoute>
       <div>

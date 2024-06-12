@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import ModalCocina from "@/components/ModalcOCINA";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import ProtectedRoute from "../ProtectedRoute";
 
 const page = () => {
   const router = useRouter();
@@ -23,7 +24,7 @@ const page = () => {
   }, []);
   console.log(datos);
   return (
-    <>
+    <ProtectedRoute>
       <div className="flex justify-center">
         <div className="flex   mb-56 mx-10 ancho-cocina overflow-x-scroll mt-5">
           {datos.map((orden, index) => (
@@ -81,7 +82,7 @@ const page = () => {
         </div>
         {modal && <ModalCocina setModal={setModal} />}
       </div>
-    </>
+    </ProtectedRoute>
   );
 };
 
