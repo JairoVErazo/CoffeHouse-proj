@@ -4,11 +4,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-
-
 const page = () => {
-
-  const router= useRouter();
+  const router = useRouter();
 
   const [data, setData] = useState([]);
 
@@ -86,47 +83,29 @@ const page = () => {
                               fontWeight: "bold",
                             }}
                           >
-                           {ingrediente.nombre}
+                            {ingrediente.nombre}
                           </p>
-                        </div>
-                        <div className="ml-32">
-                          <button
-                            onClick={() =>
-                              router.push(
-                              "/ingredientes/editar/" + ingrediente.idIngrediente
-                              )
-                            }
-                          >
-                            <img src="edit.svg" alt="editar" className="h-10" />
-                          </button>
-                          
                         </div>
                       </div>
                       <div style={{ display: "flex", alignItems: "center" }}>
-                        <img
-                          src={"/img/cheesecake.jpg"}
-                          style={{
-                            width: "150px",
-                            height: "150px",
-                            border: "5px solid #94303c",
-                            marginLeft: "40px",
-                          }}
-                          alt="cake"
-                        />
                         <div className="justify-center flex text-xl font-bold">
-                        <div className="mr-20 ml-10">
-                          <p className="text-center mr-10 ml-6">Precio Unitario:</p>
-                          <p className="text-center">${ingrediente.precioUnitario}</p>
-                        </div>
-                        <div>
-                          <p className="text-center">Existencias:</p>
-                          <p className="text-center">
-                            {ingrediente.existencias} {ingrediente.unidadMedida}
-                          </p>
+                          <div className="mr-20 ml-10">
+                            <p className="text-center mr-10 ml-6">
+                              Precio Unitario:
+                            </p>
+                            <p className="text-center">
+                              ${ingrediente.precioUnitario}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-center">Existencias:</p>
+                            <p className="text-center">
+                              {ingrediente.existencias}{" "}
+                              {ingrediente.unidadMedida}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                      </div>
-                     
                     </div>
                   ))}
                 </div>

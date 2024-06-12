@@ -2,6 +2,7 @@
 import useStore from "@/data/store";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import swal from "sweetalert";
 
 const Page = () => {
@@ -10,6 +11,7 @@ const Page = () => {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [productQuantities, setProductQuantities] = useState([]);
+  const Router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,7 +47,6 @@ const Page = () => {
   }, [cart]);
 
   const handleConfirmarPedido = async () => {
-    consolo;
     try {
       for (const product of productQuantities) {
         const response = await axios.post("/api/DetalleOrden", product);
@@ -53,6 +54,7 @@ const Page = () => {
           throw new Error("Error al ingresar los datos");
         }
       }
+      Router.push("/pago");
     } catch (error) {
       console.error("Error enviando datos:", error);
       alert("Hubo un error al ingresar los datos.");
