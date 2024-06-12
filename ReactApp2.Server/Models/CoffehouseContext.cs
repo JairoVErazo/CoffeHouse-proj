@@ -42,7 +42,8 @@ public partial class CoffehouseContext : DbContext
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("name=DefaultConnection");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-5SK7M5O; Database=COFFEHOUSE; Trusted_Connection=True; TrustServerCertificate=true;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -59,27 +60,25 @@ public partial class CoffehouseContext : DbContext
 
         modelBuilder.Entity<DetalleOrden>(entity =>
         {
-           
+
             entity.HasKey(d => new { d.IdReceta, d.IdOrden });
 
             entity.Property(e => e.PrecioTotal).HasColumnType("money");
 
-            
+
             entity.HasOne(d => d.IdOrdenNavigation)
                 .WithMany()
                 .HasForeignKey(d => d.IdOrden)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_DetalleOrden_Orden");
 
-         
+
             entity.HasOne(d => d.IdRecetaNavigation)
                 .WithMany()
                 .HasForeignKey(d => d.IdReceta)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_DetalleOrden_Recetas");
         });
-
-
 
         modelBuilder.Entity<DetalleRecetum>(entity =>
         {
@@ -149,7 +148,7 @@ public partial class CoffehouseContext : DbContext
 
         modelBuilder.Entity<MetodoPago>(entity =>
         {
-            entity.HasKey(e => e.IdMetodopago).HasName("PK__MetodoPa__47952DC932DBAE4E");
+            entity.HasKey(e => e.IdMetodopago).HasName("PK__MetodoPa__47952DC9EA302BBD");
 
             entity.ToTable("MetodoPago");
 
@@ -199,6 +198,7 @@ public partial class CoffehouseContext : DbContext
         {
             entity.HasKey(e => e.IdProducto);
 
+            entity.Property(e => e.Ganancia).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.NombreProducto)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -213,6 +213,8 @@ public partial class CoffehouseContext : DbContext
         modelBuilder.Entity<Receta>(entity =>
         {
             entity.HasKey(e => e.IdReceta);
+
+            entity.ToTable(tb => tb.HasTrigger("trg_UpdateGananciaRiesgo"));
 
             entity.Property(e => e.CostoTotal).HasColumnType("money");
             entity.Property(e => e.Nombre)

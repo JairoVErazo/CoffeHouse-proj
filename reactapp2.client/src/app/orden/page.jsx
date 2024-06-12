@@ -45,6 +45,7 @@ const Page = () => {
   }, [cart]);
 
   const handleConfirmarPedido = async () => {
+    consolo;
     try {
       for (const product of productQuantities) {
         const response = await axios.post("/api/DetalleOrden", product);
@@ -57,9 +58,6 @@ const Page = () => {
       alert("Hubo un error al ingresar los datos.");
     }
   };
-
-  console.log(data);
-  console.log(productQuantities);
 
   return (
     <div>
@@ -90,7 +88,7 @@ const Page = () => {
                         className="card rounded-xl"
                         style={{
                           backgroundColor: "#ffffff, 0.7",
-                          padding: "50px",
+                          padding: "5px",
                           width: "850px",
                         }}
                       >
@@ -156,18 +154,6 @@ const Page = () => {
                                   </div>
                                 </div>
                               </div>
-                              <div className="flex justify-center">
-                                <button
-                                  type="button"
-                                  className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 "
-                                  style={{
-                                    backgroundColor: "#94303c",
-                                    marginLeft: "80px",
-                                  }}
-                                >
-                                  + Comentarios
-                                </button>
-                              </div>
                             </div>
                           </div>
                         </div>
@@ -195,7 +181,7 @@ const Page = () => {
             <button
               type="button"
               onClick={handleConfirmarPedido}
-              className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 "
+              className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 me-16 mb-2 my-4 "
               style={{
                 backgroundColor: "#94303c",
                 marginLeft: "80px",

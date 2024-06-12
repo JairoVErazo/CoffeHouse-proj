@@ -21,6 +21,10 @@ public partial class Producto
 
     public string Descripcion { get; set; } = null!;
 
+    public decimal? Ganancia { get; set; }
+
+    public int? Riesgo { get; set; }
+
     public virtual CategoriaProducto IdCategoriaNavigation { get; set; } = null!;
 
     public virtual ICollection<Receta> Receta { get; set; } = new List<Receta>();

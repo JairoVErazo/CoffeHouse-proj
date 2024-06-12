@@ -32,19 +32,19 @@ namespace CoffeHouse.Server.Servicios
 
         public async Task<string> ObtenerNombreCategoria(int id)
         {
-           var cateogria = await _context.CategoriaProductos.Where(c => c.IdCategoria == id).FirstAsync();
+            var cateogria = await _context.CategoriaProductos.Where(c => c.IdCategoria == id).FirstAsync();
 
-           string nombre = cateogria.NombreCategoria;
+            string nombre = cateogria.NombreCategoria;
 
-           return nombre;
-    
+            return nombre;
+
         }
 
         public async Task<IEnumerable<ProductoDTO>> ObtenerProductos()
         {
             var products = await _context.Productos.Include(p => p.Receta).ToListAsync();
 
-            List<ProductoDTO>productoResponse = new();
+            List<ProductoDTO> productoResponse = new();
             foreach (var producto in products)
             {
                 ProductoDTO productoDTO = _mapper.Map<ProductoDTO>(producto);
@@ -57,8 +57,8 @@ namespace CoffeHouse.Server.Servicios
 
             return productoResponse;
         }
-           
-        
+
+
 
         public async Task<Producto> ObtenerProductoDetalles(int idProducto)
         {
@@ -74,14 +74,14 @@ namespace CoffeHouse.Server.Servicios
         {
             var ruta = String.Empty;
 
-            if(file.Length > 0)
+            if (file.Length > 0)
             {
                 var nombreArchivo = Guid.NewGuid().ToString() + ".jpg";
                 ruta = $"Imagenes/{nombreArchivo}";
                 using (var stream = new FileStream(ruta, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
-                } 
+                }
             }
 
             return ruta;
@@ -122,9 +122,9 @@ namespace CoffeHouse.Server.Servicios
                 rutaImagen = await CargarImagen(request.Imagen);
             }
 
-            if(request.IdCategoria is 0)
+            if (request.IdCategoria is 0)
             {
-                request.IdCategoria = producto.IdCategoria; 
+                request.IdCategoria = producto.IdCategoria;
             }
 
             rutaImagen = producto.Imagen;
@@ -156,7 +156,7 @@ namespace CoffeHouse.Server.Servicios
                 }
 
             }
-                _context.Productos.Update(producto);
+            _context.Productos.Update(producto);
             await _context.SaveChangesAsync();
 
             return producto;
@@ -169,7 +169,7 @@ namespace CoffeHouse.Server.Servicios
             return new MensajeRespuesta
             {
                 Tipo = null,
-                Titulo = titulo ,
+                Titulo = titulo,
                 Mensaje = message
             };
         }
@@ -181,7 +181,7 @@ namespace CoffeHouse.Server.Servicios
 
             await _context.DetalleReceta.Where(p => p.IdRecetas == recetas.IdReceta).ExecuteDeleteAsync();
             _context.Recetas.Remove(recetas);
-             _context.Productos.Remove(producto);
+            _context.Productos.Remove(producto);
             await _context.SaveChangesAsync();
 
             return new MensajeRespuesta
@@ -196,7 +196,7 @@ namespace CoffeHouse.Server.Servicios
 
         public async Task<IEnumerable<Producto>> ObtenerProductosPorCategoria(int idCategoria)
         {
-            if(idCategoria is 0)
+            if (idCategoria is 0)
             {
                 return null;
             }

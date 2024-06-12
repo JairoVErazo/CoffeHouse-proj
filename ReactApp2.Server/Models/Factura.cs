@@ -15,6 +15,5 @@ public partial class Factura
 
     public int IdMetodopago { get; set; }
 
-    public virtual MetodoPago? IdMetodopagoNavigation { get; set; }
-  
+    public virtual MetodoPago IdMetodopagoNavigation { get; set; } = null!;
 }

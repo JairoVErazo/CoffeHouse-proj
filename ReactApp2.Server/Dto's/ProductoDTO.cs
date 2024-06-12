@@ -13,6 +13,8 @@ namespace CoffeHouse.Server.Dto_s
         public bool Disponible { get; set; }
         public string? Imagen { get; set; }
         public string? Descripcion { get; set; }
+        public decimal Ganancia { get; set; }
+        public int Riesgo { get; set; }
         public List<RecetaDTO> Recetas { get; set; } = new List<RecetaDTO>();
     }
 }
