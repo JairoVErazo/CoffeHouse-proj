@@ -2,11 +2,14 @@
 import useStore from "@/data/store";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import swal from "sweetalert";
 
 const Page = () => {
   const cart = useStore((state) => state.cart);
   const idOrden = useStore((state) => state.idOrden);
   const [data, setData] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [productQuantities, setProductQuantities] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,6 +21,19 @@ const Page = () => {
           })
         );
         setData(productDetails);
+
+        const newTotal = productDetails.reduce((acc, producto) => {
+          return acc + producto.precio * cart[producto.idProducto];
+        }, 0);
+        setTotal(newTotal.toFixed(2));
+
+        const quantities = productDetails.map((producto) => ({
+          idReceta: producto.recetas[0].id,
+          idOrden: idOrden,
+          CantidadProductos: cart[producto.idProducto],
+          PrecioTotal: (producto.precio * cart[producto.idProducto]).toFixed(2),
+        }));
+        setProductQuantities(quantities);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -28,7 +44,22 @@ const Page = () => {
     }
   }, [cart]);
 
-  console.log(idOrden);
+  const handleConfirmarPedido = async () => {
+    try {
+      for (const product of productQuantities) {
+        const response = await axios.post("/api/DetalleOrden", product);
+        if (response.status !== 200) {
+          throw new Error("Error al ingresar los datos");
+        }
+      }
+    } catch (error) {
+      console.error("Error enviando datos:", error);
+      alert("Hubo un error al ingresar los datos.");
+    }
+  };
+
+  console.log(data);
+  console.log(productQuantities);
 
   return (
     <div>
@@ -114,9 +145,13 @@ const Page = () => {
                                     >
                                       {cart[producto.idProducto]}
                                     </p>
+
                                     <p style={{ marginRight: "30px" }}>
-                                      {" "}
-                                      ${producto.precio}
+                                      Total: $
+                                      {(
+                                        producto.precio *
+                                        cart[producto.idProducto]
+                                      ).toFixed(2)}
                                     </p>
                                   </div>
                                 </div>
@@ -151,9 +186,14 @@ const Page = () => {
             )}
           </div>
 
+          <div className="flex justify-center mt-4">
+            <div className="text-black font-bold">Total a Pagar: ${total}</div>
+          </div>
+
           <div className="flex justify-center">
             <button
               type="button"
+              onClick={handleConfirmarPedido}
               className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 "
               style={{
                 backgroundColor: "#94303c",
