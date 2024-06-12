@@ -93,5 +93,18 @@ namespace CoffeHouse.Server.Controllers
             var nuevaOrden = await _repositorioOrden.CrearOrden(request);
             return Ok(nuevaOrden);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> ActualizarOrden(int id, [FromBody] ActualizarOrdenRequest request)
+        {
+            TimeOnly horaDespacho = TimeOnly.FromDateTime(DateTime.Now);
+
+            var resultado = await _repositorioOrden.ActualizarOrden(id, request.NuevoEstado, horaDespacho);
+            if (!resultado)
+            {
+                return NotFound(new { error = $"La orden con el id {id} no fue encontrada" });
+            }
+            return Ok(new { mensaje = "Orden actualizada correctamente", horaDespacho });
+        }
     }
 }
